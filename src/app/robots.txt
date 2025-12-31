@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://montessori-web-example.com/sitemap.xml
