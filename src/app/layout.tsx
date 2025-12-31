@@ -1,29 +1,69 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import "./globals.css";
+import type { Metadata } from "next"
+import localFont from "next/font/local"
+import Header from "@/components/Header"
+import Footer from "@/components/Footer"
+import "./globals.css"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
-});
+})
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
-});
+})
 
 export const metadata: Metadata = {
-  title: "몬테소리 | Montessori",
-  description: "엄마와 아이가 함께 성장하는 몬테소리 교육 센터",
-};
+  title: {
+    default: "몬테소리 | Montessori",
+    template: "%s | 몬테소리"
+  },
+  description: "아이의 잠재력을 깨우는 정통 AMS 몬테소리 교육. 엄마와 아이가 함께 성장하는 특별한 시간을 만나보세요.",
+  keywords: ["몬테소리", "Montessori", "AMS 몬테소리", "유아 교육", "부모 교육", "정통 몬테소리", "아이 중심 교육"],
+  authors: [{ name: "Montessori" }],
+  creator: "Montessori",
+  publisher: "Montessori",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    title: "몬테소리 | Montessori",
+    description: "아이의 잠재력을 깨우는 정통 AMS 몬테소리 교육",
+    url: "https://montessori-web-example.com", // 실제 도메인이 있다면 교체 필요
+    siteName: "몬테소리",
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "몬테소리 | Montessori",
+    description: "아이의 잠재력을 깨우는 정통 AMS 몬테소리 교육",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="ko">
@@ -35,5 +75,5 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link"
 
 export default function Header() {
   return (
@@ -14,15 +14,12 @@ export default function Header() {
             <Link href="/montessori" className="text-stone-600 hover:text-stone-900 px-3 py-2 rounded-md text-sm font-medium transition-colors">
               몬테소리란?
             </Link>
-            <Link href="/#programs" className="text-stone-600 hover:text-stone-900 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            <Link href="/programs" className="text-stone-600 hover:text-stone-900 px-3 py-2 rounded-md text-sm font-medium transition-colors">
               프로그램
-            </Link>
-            <Link href="/center" className="text-stone-600 hover:text-stone-900 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-              센터 소개
             </Link>
           </nav>
         </div>
       </div>
     </header>
-  );
+  )
 }

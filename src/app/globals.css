@@ -5,5 +5,45 @@
 @layer base {
   body {
     @apply bg-stone-50 text-stone-900;
+    scroll-behavior: smooth;
   }
 }
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in-from-bottom {
+  from { transform: translateY(1rem); }
+  to { transform: translateY(0); }
+}
+
+.animate-in {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation-name: fade-in;
+}
+
+.slide-in-from-bottom-4 {
+  animation-name: slide-in-from-bottom;
+  --tw-translate-y: 1rem;
+}
+
+.slide-in-from-bottom-6 {
+  animation-name: slide-in-from-bottom;
+  --tw-translate-y: 1.5rem;
+}
+
+.slide-in-from-bottom-8 {
+  animation-name: slide-in-from-bottom;
+  --tw-translate-y: 2rem;
+}
+
+.delay-200 { animation-delay: 200ms; }
+.delay-500 { animation-delay: 500ms; }
+.duration-1000 { animation-duration: 1000ms; }
+.fill-mode-both { animation-fill-mode: both; }
