@@ -3,6 +3,7 @@ import localFont from "next/font/local"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import "./globals.css"
+import { LocaleProvider } from "@/components/LocaleContext"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -16,6 +17,7 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
+// ... 생략 (기존 메타데이터 유지)
   title: {
     default: "몬테소리 | Montessori",
     template: "%s | 몬테소리"
@@ -70,9 +72,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-stone-50 text-stone-900`}
       >
-        <Header />
-        {children}
-        <Footer />
+        <LocaleProvider>
+          <Header />
+          {children}
+          <Footer />
+        </LocaleProvider>
       </body>
     </html>
   )

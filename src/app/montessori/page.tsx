@@ -1,20 +1,18 @@
-import Image from "next/image"
-import type { Metadata } from "next"
+"use client"
 
-export const metadata: Metadata = {
-  title: "몬테소리란?",
-  description: "마리아 몬테소리 박사의 철학과 정통 몬테소리 교육의 3요소(아이, 환경, 교사)를 소개합니다.",
-}
+import Image from "next/image"
+import { useLocale } from "@/components/LocaleContext"
 
 export default function MontessoriPage() {
+  const { dict } = useLocale()
+  
   return (
     <div className="min-h-screen pt-16 font-[family-name:var(--font-geist-sans)] pb-24">
       {/* Title Header */}
       <div className="bg-stone-100 py-20 px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-4xl sm:text-5xl font-bold text-stone-900 mb-6">몬테소리 교육이란?</h1>
-        <p className="text-xl text-stone-600 max-w-2xl mx-auto">
-          &quot;스스로 할 수 있도록 도와주세요&quot;<br/>
-          아이는 자신을 창조하는 놀라운 능력을 가지고 있습니다.
+        <h1 className="text-4xl sm:text-5xl font-bold text-stone-900 mb-6">{dict.montessori.title}</h1>
+        <p className="text-xl text-stone-600 max-w-2xl mx-auto whitespace-pre-line">
+          {dict.montessori.subtitle}
         </p>
       </div>
 
@@ -23,23 +21,20 @@ export default function MontessoriPage() {
         {/* Section 1: History */}
         <section className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-2xl font-bold text-stone-800 mb-4">마리아 몬테소리 (Maria Montessori)</h2>
+            <h2 className="text-2xl font-bold text-stone-800 mb-4">{dict.montessori.history.title}</h2>
             <div className="space-y-4 text-stone-600 leading-relaxed">
                <p>
-                 몬테소리 교육의 창시자 마리아 몬테소리는 이탈리아 최초의 여성 의사였습니다.
-                 그녀는 정신지체 아동들을 관찰하며 그들이 감각적인 자극에 반응한다는 것을 발견하고,
-                 이를 일반 아동 교육에 적용하여 혁신적인 교육법을 창안했습니다.
+                 {dict.montessori.history.p1}
                </p>
                <p>
-                 1907년 로마의 빈민가에 &apos;어린이의 집(Casa dei Bambini)&apos;을 설립하여,
-                 아이들이 준비된 환경 속에서 스스로 선택하고 집중할 때 놀라운 성장을 보인다는 것을 처음으로 증명했습니다.
+                 {dict.montessori.history.p2}
                </p>
             </div>
           </div>
           <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-lg">
             <Image
               src="https://upload.wikimedia.org/wikipedia/commons/8/82/Maria_Montessori_%28portrait%29.jpg"
-              alt="마리아 몬테소리"
+              alt={dict.montessori.history.img_alt}
               fill
               className="object-cover"
             />
@@ -48,27 +43,27 @@ export default function MontessoriPage() {
 
         {/* Section 2: Core Principles */}
         <section>
-          <h2 className="text-3xl font-bold text-stone-900 text-center mb-12">몬테소리 교육의 3요소</h2>
+          <h2 className="text-3xl font-bold text-stone-900 text-center mb-12">{dict.montessori.elements.title}</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white p-8 rounded-2xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
               <div className="text-4xl mb-4">👶</div>
-              <h3 className="text-xl font-bold text-stone-800 mb-3">아이 (The Child)</h3>
+              <h3 className="text-xl font-bold text-stone-800 mb-3">{dict.montessori.elements.child_title}</h3>
               <p className="text-stone-600">
-                아이는 학습의 주체입니다. 어른이 주입시키는 것이 아니라, 아이 내부의 발달 본능(흡수정신)에 따라 환경과 상호작용하며 스스로 배웁니다.
+                {dict.montessori.elements.child_desc}
               </p>
             </div>
             <div className="bg-white p-8 rounded-2xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
                <div className="text-4xl mb-4">🏫</div>
-               <h3 className="text-xl font-bold text-stone-800 mb-3">준비된 환경 (Environment)</h3>
+               <h3 className="text-xl font-bold text-stone-800 mb-3">{dict.montessori.elements.env_title}</h3>
                <p className="text-stone-600">
-                 아이의 발달 단계와 신체 사이즈에 꼭 맞는 교구와 가구들이 질서 있게 정돈된 환경입니다. 아이는 이곳에서 자유롭게 교구를 선택합니다.
+                 {dict.montessori.elements.env_desc}
                </p>
             </div>
             <div className="bg-white p-8 rounded-2xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
                <div className="text-4xl mb-4">👩‍🏫</div>
-               <h3 className="text-xl font-bold text-stone-800 mb-3">제시자 (Director)</h3>
+               <h3 className="text-xl font-bold text-stone-800 mb-3">{dict.montessori.elements.director_title}</h3>
                <p className="text-stone-600">
-                 교사는 가르치는 사람이 아닌 아이와 환경을 연결해주는 안내자입니다. 아이를 관찰하고 적절한 시기에 교구를 제시합니다.
+                 {dict.montessori.elements.director_desc}
                </p>
              </div>
           </div>
@@ -77,10 +72,9 @@ export default function MontessoriPage() {
         {/* Section 3: Quote */}
         <section className="bg-stone-50 p-12 rounded-3xl text-center border border-stone-100">
            <blockquote className="text-2xl font-serif italic text-stone-800 mb-6">
-             &quot;교육의 목적은 아이가 독립적인 인격체로 성장하도록 돕는 것입니다.
-             우리는 아이가 혼자 할 수 있는 일을 결코 대신 해주어서는 안 됩니다.&quot;
+             &quot;{dict.montessori.quote.text}&quot;
            </blockquote>
-           <cite className="text-stone-500 font-medium">- Maria Montessori</cite>
+           <cite className="text-stone-500 font-medium">- {dict.montessori.quote.author}</cite>
         </section>
 
       </div>
