@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import localFont from "next/font/local"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
+import GoogleAdsense from "@/components/GoogleAdsense"
 import "./globals.css"
 import { LocaleProvider } from "@/components/LocaleContext"
 
@@ -60,6 +61,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  other: {
+    "google-adsense-account": "ca-pub-1586372003132738",
+  },
 }
 
 export default function RootLayout({
@@ -72,6 +76,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-stone-50 text-stone-900`}
       >
+        <GoogleAdsense pId={process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID!} />
         <LocaleProvider>
           <Header />
           {children}
