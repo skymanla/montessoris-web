@@ -2,6 +2,7 @@ const dictionaries = {
   ko: {
     header: {
       about: "몬테소리란?",
+      benefits: "장점",
       programs: "프로그램",
     },
     hero: {
@@ -81,11 +82,61 @@ const dictionaries = {
         text: "교육의 목적은 아이가 독립적인 인격체로 성장하도록 돕는 것입니다. 우리는 아이가 혼자 할 수 있는 일을 결코 대신 해주어서는 안 됩니다.",
         author: "Maria Montessori",
       }
+    },
+    footer: {
+      privacy: "개인정보처리방침",
+      terms: "이용약관",
+      contact: "문의하기",
+    },
+    benefits: {
+      title: "몬테소리 교육의 장점",
+      subtitle: "아이의 무한한 잠재력을 깨우는 몬테소리 교육, 어떤 점이 특별할까요?",
+      items: [
+        {
+          id: "independence",
+          title: "자율성과 독립심",
+          desc: "아이가 스스로 선택하고 활동하며 자신감을 키웁니다.",
+          content: "몬테소리 교육의 가장 큰 핵심은 아이가 스스로 할 수 있도록 돕는 것입니다. '준비된 환경' 속에서 아이는 자신이 하고 싶은 활동을 직접 선택하고, 그 과정을 끝까지 완수하며 성취감과 독립심을 배웁니다. 이러한 경험은 성인이 되어서도 자기 주도적인 삶을 살아가는 큰 밑거름이 됩니다."
+        },
+        {
+          id: "concentration",
+          title: "집중력과 질서감",
+          desc: "교구 활동을 통해 깊은 몰입의 즐거움을 경험합니다.",
+          content: "정돈된 환경과 매력적인 교구는 아이의 관심을 끕니다. 아이가 하나의 활동에 깊이 몰입하는 '집중의 순간'을 방해하지 않는 것이 몬테소리 교육의 원칙입니다. 이를 통해 아이는 높은 집중력을 기르게 되며, 사용한 교구를 제자리에 두는 과정을 통해 자연스럽게 질서감을 익힙니다."
+        },
+        {
+          id: "social-emotional",
+          title: "사회성과 정서 발달",
+          desc: "타인을 존중하고 배려하는 따뜻한 마음을 배웁니다.",
+          content: "몬테소리 교실은 다양한 연령대의 아이들이 함께 지내는 '혼합 연령 학급'으로 구성되기도 합니다. 동생들은 형들을 보고 배우며, 형들은 동생들을 도와주며 공동체 의식을 함양합니다. 또한 교구를 기다리고 양보하는 과정을 통해 인내심과 사회적 배려를 자연스럽게 체득하게 됩니다."
+        },
+        {
+          id: "creativity",
+          title: "창의적 문제 해결",
+          desc: "정해진 정답이 아닌, 스스로 답을 찾아가는 과정을 즐깁니다.",
+          content: "몬테소리 교구는 스스로 오류를 정정할 수 있도록 설계되어 있습니다. 어른의 지적 없이도 아이는 활동 중에 스스로 실수를 발견하고 해결 방법을 찾아냅니다. 이 과정에서 비판적 사고력과 창의적인 문제 해결 능력이 자연스럽게 발달하게 됩니다."
+        }
+      ]
+    },
+    contact: {
+      title: "문의하기",
+      subtitle: "궁금하신 점이 있으시면 언제든 문의해 주세요.",
+      name: "이름",
+      email: "이메일",
+      message: "문의 내용",
+      send: "메시지 보내기",
+    },
+    privacy: {
+      title: "개인정보처리방침",
+    },
+    terms: {
+      title: "이용약관",
     }
   },
   en: {
     header: {
       about: "What is Montessori?",
+      benefits: "Benefits",
       programs: "Programs",
     },
     hero: {
@@ -165,6 +216,56 @@ const dictionaries = {
         text: "The goal of early childhood education should be to activate the child's own natural desire to learn. We must never help a child with a task at which he feels he can succeed.",
         author: "Maria Montessori",
       }
+    },
+    footer: {
+      privacy: "Privacy Policy",
+      terms: "Terms of Service",
+      contact: "Contact Us",
+      rights: "All rights reserved.",
+    },
+    benefits: {
+      title: "Advantages of Montessori",
+      subtitle: "Montessori education awakens the infinite potential of children. What makes it special?",
+      items: [
+        {
+          id: "independence",
+          title: "Autonomy and Independence",
+          desc: "Children build confidence by making their own choices and activities.",
+          content: "The core of Montessori education is helping children do it by themselves. In a 'prepared environment', children choose their own activities and complete them, learning achievement and independence. This experience becomes a foundation for leading a self-directed life as an adult."
+        },
+        {
+          id: "concentration",
+          title: "Concentration and Order",
+          desc: "Experience the joy of deep immersion through manipulative activities.",
+          content: "An organized environment and attractive materials draw a child's attention. A key principle of Montessori is not to interrupt a child's 'moment of concentration'. Through this, children develop high levels of focus and naturally learn order by returning materials to their places."
+        },
+        {
+          id: "social-emotional",
+          title: "Social and Emotional Development",
+          desc: "Learn a warm heart that respects and cares for others.",
+          content: "Montessori classrooms are often 'mixed-age', where younger children learn from older ones, and older ones help younger ones, fostering a sense of community. They naturally acquire patience and social consideration by waiting for and sharing materials."
+        },
+        {
+          id: "creativity",
+          title: "Creative Problem Solving",
+          desc: "Enjoy the process of finding answers instead of fixed ones.",
+          content: "Montessori materials are designed for self-correction. Children discover mistakes and find solutions without adult intervention, naturally developing critical thinking and creative problem-solving skills."
+        }
+      ]
+    },
+    contact: {
+      title: "Contact Us",
+      subtitle: "Feel free to reach out to us with any questions.",
+      name: "Name",
+      email: "Email",
+      message: "Message",
+      send: "Send Message",
+    },
+    privacy: {
+      title: "Privacy Policy",
+    },
+    terms: {
+      title: "Terms of Service",
     }
   }
 }

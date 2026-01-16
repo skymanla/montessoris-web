@@ -19,6 +19,7 @@ export default function Header() {
 
   const menuItems = [
     { name: dict.header.about, href: "/montessori" },
+    { name: dict.header.benefits, href: "/benefits" },
     { name: dict.header.programs, href: "/programs" },
   ]
 
