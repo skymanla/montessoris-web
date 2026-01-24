@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "몬테소리 | Montessori",
     description: "아이의 잠재력을 깨우는 정통 AMS 몬테소리 교육",
-    url: "https://montessori-web-example.com", // 실제 도메인이 있다면 교체 필요
+    url: "https://montessoris.net",
     siteName: "몬테소리",
     locale: "ko_KR",
     type: "website",

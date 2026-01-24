@@ -21,6 +21,7 @@ export default function Header() {
     { name: dict.header.about, href: "/montessori" },
     { name: dict.header.benefits, href: "/benefits" },
     { name: dict.header.programs, href: "/programs" },
+    { name: "Blog", href: "/blog" },
   ]
 
   return (
@@ -32,19 +33,19 @@ export default function Header() {
               Montessori
             </Link>
           </div>
-          
+
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {menuItems.map((item) => (
-              <Link 
+              <Link
                 key={item.href}
-                href={item.href} 
+                href={item.href}
                 className="text-stone-600 hover:text-stone-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 {item.name}
               </Link>
             ))}
-            
+
             <button
               onClick={toggleLocale}
               className="flex items-center gap-1.5 text-stone-500 hover:text-stone-900 px-3 py-2 rounded-md text-sm font-medium transition-colors border border-stone-200 hover:border-stone-400"

@@ -3,7 +3,7 @@ import HomeClient from "./HomeClient"
 
 export const metadata: Metadata = {
   title: "홈 | Montessori",
-  description: "아이의 잠재력을 깨우는 정통 AMS 몬테소리 교육. 엄마와 아이가 함께 성장하는 특별한 시간을 만나보세요.",
+  description: "정통 AMS 몬테소리 교육으로 아이의 자율성과 잠재력을 깨워주세요. 0세부터 6세까지, 발달 단계별 맞춤형 교구와 준비된 환경을 제공합니다.",
 }
 
 export default function Home() {

@@ -13,51 +13,51 @@ const dictionaries = {
     philosophy: {
       badge: "Montessori Education",
       title: '"나 혼자 할 수 있도록 도와주세요"',
-      p1: "몬테소리 교육은 이탈리아의 의사이자 교육가였던 마리아 몬테소리 박사가 창안한 교육법입니다. 아이들은 스스로 배우고자 하는 본능적인 욕구를 가지고 태어난다는 믿음에서 시작합니다.",
-      p2: "우리의 역할은 아이를 가르치는 것이 아니라, '준비된 환경'을 제공하여 아이 스스로 잠재력을 발휘하고 성장할 수 있도록 돕는 것입니다.",
-      feature1: "자율성을 존중하는 아이 중심 교육",
-      feature2: "개별 발달 단계에 맞춘 1:1 교구 활동",
-      feature3: "질서감과 집중력을 키우는 환경",
+      p1: "몬테소리 교육은 단순히 지식을 주입하는 학습법이 아닙니다. 이탈리아의 의사이자 교육가였던 마리아 몬테소리 박사가 창안한 이 교육법은, 아이들이 태어날 때부터 스스로 배우고자 하는 본능적인 욕구와 무한한 잠재력을 가지고 있다는 깊은 믿음에서 출발합니다. 우리는 아이를 미성숙한 존재로 보지 않고, 스스로 성장할 수 있는 능력을 갖춘 존엄한 인격체로 바라봅니다.",
+      p2: "우리의 역할은 아이를 가르치거나 주도하는 것이 아니라, 아이의 발달 단계에 완벽하게 맞춰진 '준비된 환경(Prepared Environment)'을 제공하는 것입니다. 그 안에서 아이는 스스로 교구를 선택하고 몰입하며, 내면의 질서를 잡고 자신만의 속도로 성장해 나갑니다. 이것이 바로 100년 넘게 전 세계적으로 검증된 몬테소리 교육의 본질입니다.",
+      feature1: "아이의 자율성을 100% 존중하는 자기 주도적 학습 환경",
+      feature2: "개별 발달 속도와 흥미에 맞춘 1:1 맞춤형 교구 활동",
+      feature3: "내면의 질서감과 깊은 집중력을 자연스럽게 이끌어내는 환경",
     },
     why: {
       title: "왜 Montessori인가요?",
-      subtitle: "아이의 발달 단계에 맞춘 체계적인 환경과 교구로 자율성과 집중력을 키워줍니다.",
+      subtitle: "단순한 놀이가 아닙니다. 아이의 결정적 시기에 맞춘 체계적인 환경과 과학적인 교구로 일생을 살아가는 데 필요한 자율성, 집중력, 그리고 긍정적인 자존감을 키워줍니다.",
       feature1_title: "AMS 기준 정통 교육",
-      feature1_desc: "미국 몬테소리 협회의 기준을 철저히 준수한 교육 환경과 커리큘럼을 제공합니다.",
+      feature1_desc: "미국 몬테소리 협회(AMS)의 엄격한 기준을 철저히 준수한 교육 환경을 제공합니다. 검증된 커리큘럼과 자격증을 보유한 전문 교사가 아이의 성장을 체계적으로 지원합니다.",
       feature2_title: "발달 단계별 맞춤",
-      feature2_desc: "아이의 개월 수와 발달 속도에 맞춘 1:1 개별 맞춤 교육 프로그램을 운영합니다.",
-      feature3_title: "부모 교육 프로그램",
-      feature3_desc: "아이를 더 잘 이해할 수 있도록 부모님을 위한 체계적인 가이드를 함께 제공합니다.",
+      feature2_desc: "모든 아이는 다릅니다. 우리는 획일적인 단체 수업을 거부하고, 아이의 개월 수와 발달 속도, 기질에 맞춘 1:1 개별 맞춤 교육 프로그램(IEP)을 운영하여 학습 효과를 극대화합니다.",
+      feature3_title: "부모 교육 파트너십",
+      feature3_desc: "가정에서도 일관성 있는 몬테소리 교육이 이어질 수 있도록, 부모님을 위한 정기적인 교육과 상담, 가정 내 환경 구성 가이드를 제공하여 진정한 교육 파트너십을 구축합니다.",
     },
     programs: {
       title: "교육 프로그램",
-      subtitle: "신생아부터 학령기 전 아동까지, 아이의 황금기를 함께하는 단계별 커리큘럼입니다.",
+      subtitle: "신생아부터 학령기 전 아동까지, 아이의 인생에서 가장 중요한 '결정적 시기(Critical Periods)'를 놓치지 않도록 설계된 단계별 커리큘럼입니다.",
       nido: {
         age: "0-14개월",
         name: "Nido (니도)",
-        desc: "신뢰감 형성과 대소근육 발달을 돕는 감각 환경",
+        desc: "엄마의 품처럼 편안하고 안전한 환경에서 신뢰감을 형성합니다. 감각 발달을 위한 모빌 활동, 대소근육 발달을 돕는 신체 활동을 통해 세상과 처음 만나는 아이의 건강한 발달을 돕습니다.",
       },
       ic: {
         age: "14-36개월",
         name: "IC (Infant Community)",
-        desc: "언어 폭발기와 자아 형성을 돕는 독립심 교육",
+        desc: "걸음마를 시작하고 언어가 폭발적으로 발달하는 시기입니다. '일상 영역' 활동을 통해 스스로 입고 먹는 법을 배우며 독립심을 기르고, 타인과의 상호작용을 통해 자아와 사회성을 형성합니다.",
       },
       casa: {
         age: "3-6세",
         name: "Casa (어린이의 집)",
-        desc: "일상, 감각, 언어, 수, 문화의 5대 영역 통합 교육",
+        desc: "흡수 정신이 극대화되는 시기입니다. 일상, 감각, 언어, 수, 문화 등 5대 영역의 통합 교육을 통해 논리적 사고력과 추상적 개념을 구체화하며, 예의와 배려를 갖춘 전인적인 어린이로 성장합니다.",
       },
       parenting: {
         age: "전 연령",
         name: "부모 코칭",
-        desc: "가정 내 몬테소리 환경 구성 및 상호작용 가이드",
+        desc: "몬테소리 교육은 가정에서 완성됩니다. 아이를 관찰하는 법, 기질에 맞는 훈육법, 가정 내 몬테소리 환경 구성법 등 실질적인 육아 솔루션을 제공합니다.",
       },
       features: {
         title: "프로그램 특징",
-        f1_title: "1:1 맞춤형 교육",
-        f1_desc: "아이마다 다른 발달 속도와 관심사를 존중하여 개별 맞춤 진도로 수업이 진행됩니다.",
-        f2_title: "정통 AMS 교구",
-        f2_desc: "미국 몬테소리 협회(AMS) 인증 기준을 통과한 고품질 원목 교구들을 사용하여 감각 학습을 극대화합니다.",
+        f1_title: "1:1 완전 맞춤형 교육",
+        f1_desc: "아이마다 다른 발달 속도와 관심사를 깊이 관찰하여, 그 시점에 가장 필요한 교구를 적절한 순간에 제시(Presentation)합니다.",
+        f2_title: "프리미엄 정통 AMS 교구",
+        f2_desc: "플라스틱 장난감이 아닌, 따뜻한 질감의 원목 교구를 사용합니다. 미국 몬테소리 협회(AMS) 인증 기준을 통과한 안전하고 교육적인 교구들은 아이의 감각을 섬세하게 자극합니다.",
       }
     },
     montessori: {
@@ -72,11 +72,11 @@ const dictionaries = {
       elements: {
         title: "몬테소리 교육의 3요소",
         child_title: "아이 (The Child)",
-        child_desc: "아이는 학습의 주체입니다. 어른이 주입시키는 것이 아니라, 아이 내부의 발달 본능(흡수정신)에 따라 환경과 상호작용하며 스스로 배웁니다.",
+        child_desc: "아이는 빈 그릇이 아닙니다. 스스로 학습하고 성장하려는 강력한 내부 에너지와 '흡수정신(Absorbent Mind)'을 가진 주체적인 존재입니다. 우리는 아이가 가진 무한한 가능성을 신뢰합니다.",
         env_title: "준비된 환경 (Environment)",
-        env_desc: "아이의 발달 단계와 신체 사이즈에 꼭 맞는 교구와 가구들이 질서 있게 정돈된 환경입니다. 아이는 이곳에서 자유롭게 교구를 선택합니다.",
+        env_desc: "아이의 눈높이에 맞춘 가구, 발달 단계에 맞는 매력적인 교구, 그리고 심리적인 안정감을 주는 질서 정연한 공간입니다. 아이는 이 환경 속에서 자유롭게 선택하고 탐색하며 스스로를 발달시킵니다.",
         director_title: "제시자 (Director)",
-        director_desc: "교사는 가르치는 사람이 아닌 아이와 환경을 연결해주는 안내자입니다. 아이를 관찰하고 적절한 시기에 교구를 제시합니다.",
+        director_desc: "교사는 지식을 주입하는 'Teacher'가 아닌, 아이와 환경을 연결해주는 'Director'입니다. 아이를 세심하게 관찰하고, 도움이 필요한 적절한 순간(Teachable Moment)에 개입하여 성장을 돕습니다.",
       },
       quote: {
         text: "교육의 목적은 아이가 독립적인 인격체로 성장하도록 돕는 것입니다. 우리는 아이가 혼자 할 수 있는 일을 결코 대신 해주어서는 안 됩니다.",
@@ -94,27 +94,27 @@ const dictionaries = {
       items: [
         {
           id: "independence",
-          title: "자율성과 독립심",
-          desc: "아이가 스스로 선택하고 활동하며 자신감을 키웁니다.",
-          content: "몬테소리 교육의 가장 큰 핵심은 아이가 스스로 할 수 있도록 돕는 것입니다. '준비된 환경' 속에서 아이는 자신이 하고 싶은 활동을 직접 선택하고, 그 과정을 끝까지 완수하며 성취감과 독립심을 배웁니다. 이러한 경험은 성인이 되어서도 자기 주도적인 삶을 살아가는 큰 밑거름이 됩니다."
+          title: "자율성과 독립심 (Independence)",
+          desc: "스스로 선택하고 해내는 경험을 통해 'I Can Do It'이라는 강한 자신감을 키웁니다.",
+          content: "몬테소리 교육의 핵심 철학은 'Help me do it by myself'입니다. 준비된 환경 속에서 아이는 자신이 원하는 교구를 직접 선택하고, 자신의 속도에 맞춰 활동하며, 마무리 정리까지 스스로 해냅니다. 어른의 지시에 따르는 것이 아니라 주도적으로 행동하는 이 과정은 아이에게 깊은 성취감을 주며, 이는 훗날 주체적인 삶을 살아가는 독립적인 인격체로 성장하는 단단한 뿌리가 됩니다."
         },
         {
           id: "concentration",
-          title: "집중력과 질서감",
-          desc: "교구 활동을 통해 깊은 몰입의 즐거움을 경험합니다.",
-          content: "정돈된 환경과 매력적인 교구는 아이의 관심을 끕니다. 아이가 하나의 활동에 깊이 몰입하는 '집중의 순간'을 방해하지 않는 것이 몬테소리 교육의 원칙입니다. 이를 통해 아이는 높은 집중력을 기르게 되며, 사용한 교구를 제자리에 두는 과정을 통해 자연스럽게 질서감을 익힙니다."
+          title: "몰입과 집중력 (Concentration)",
+          desc: "방해받지 않는 깊은 몰입의 경험은 아이의 두뇌를 발달시키는 최고의 자양분입니다.",
+          content: "아이들은 흥미로운 작업에 몰두할 때 놀라운 집중력을 발휘합니다. 몬테소리 교구는 아이의 호기심을 자극하고 도전을 불러일으키도록 과학적으로 설계되었습니다. 아이가 활동에 깊이 빠져있는 '몰입의 순간'을 존중하고 보호해줌으로써, 아이는 긴 시간 동안 주의를 기울이는 힘을 기르고, 내면의 평화와 정서적 안정을 얻게 됩니다."
         },
         {
           id: "social-emotional",
-          title: "사회성과 정서 발달",
-          desc: "타인을 존중하고 배려하는 따뜻한 마음을 배웁니다.",
-          content: "몬테소리 교실은 다양한 연령대의 아이들이 함께 지내는 '혼합 연령 학급'으로 구성되기도 합니다. 동생들은 형들을 보고 배우며, 형들은 동생들을 도와주며 공동체 의식을 함양합니다. 또한 교구를 기다리고 양보하는 과정을 통해 인내심과 사회적 배려를 자연스럽게 체득하게 됩니다."
+          title: "사회성과 배려 (Social Development)",
+          desc: "경쟁이 아닌 협력을 배우며, 타인을 존중하는 따뜻한 사회성을 기릅니다.",
+          content: "몬테소리 교실은 작은 사회입니다. 다양한 연령대가 어우러진 혼합 연령 학급(Mixed Age Group)에서 동생은 형을 보며 배우고, 형은 동생을 도와주며 자연스럽게 리더십과 배려심을 익힙니다. 하나의 교구를 사용하기 위해 기다리는 법, 친구의 작업을 방해하지 않는 법, 갈등을 평화롭게 해결하는 법을 생활 속에서 체득하며 성숙한 시민 의식을 갖추게 됩니다."
         },
         {
           id: "creativity",
-          title: "창의적 문제 해결",
-          desc: "정해진 정답이 아닌, 스스로 답을 찾아가는 과정을 즐깁니다.",
-          content: "몬테소리 교구는 스스로 오류를 정정할 수 있도록 설계되어 있습니다. 어른의 지적 없이도 아이는 활동 중에 스스로 실수를 발견하고 해결 방법을 찾아냅니다. 이 과정에서 비판적 사고력과 창의적인 문제 해결 능력이 자연스럽게 발달하게 됩니다."
+          title: "창의적 문제 해결력 (Problem Solving)",
+          desc: "정해진 답을 외우는 것이 아니라, 스스로 원리를 깨우치고 해결책을 찾아냅니다.",
+          content: "대부분의 몬테소리 교구는 '오류의 정정(Control of Error)' 기능을 내장하고 있습니다. 아이는 활동 중에 자신이 실수했다는 것을 스스로 인지하고, 선생님의 지적 없이도 스스로 수정하는 과정을 거치게 됩니다. 실패를 두려워하지 않고 다양한 시도를 통해 답을 찾아가는 과정에서 아이는 비판적 사고력과 창의적인 문제 해결 능력을 자연스럽게 습득합니다."
         }
       ]
     },
@@ -147,51 +147,51 @@ const dictionaries = {
     philosophy: {
       badge: "Montessori Education",
       title: '"Help me do it by myself"',
-      p1: "Montessori education is an educational method developed by Dr. Maria Montessori, an Italian physician and educator. It begins with the belief that children are born with an instinctive desire to learn.",
-      p2: "Our role is not to teach the child, but to provide a 'prepared environment' so that the child can unleash their potential and grow on their own.",
-      feature1: "Child-centered education respecting autonomy",
-      feature2: "1:1 manipulative activities for each stage",
-      feature3: "Environment fostering order and focus",
+      p1: "Montessori education is not merely a method of imparting knowledge. Conceived by Dr. Maria Montessori, Italy's first female physician and educator, this pedigree of education starts with the profound belief that children are born with an instinctive desire to learn and infinite potential. We view the child not as an immature being, but as a dignified individual capable of self-directed growth.",
+      p2: "Our role is not to teach or lead the child, but to provide a 'Prepared Environment' perfectly tailored to the child's developmental stage. Within this environment, children freely choose their work, immerse themselves, establish internal order, and grow at their own unique pace. This is the essence of Montessori education, verified globally for over 100 years.",
+      feature1: "Self-directed learning environment fully respecting the child's autonomy",
+      feature2: "1:1 personalized manipulative activities tailored to individual developmental pace and interests",
+      feature3: "Environment that naturally elicits a sense of internal order and deep concentration",
     },
     why: {
       title: "Why Montessori?",
-      subtitle: "Foster autonomy and concentration through a systematic environment and tools tailored to the child's developmental stage.",
+      subtitle: "It is not just play. We foster the autonomy, concentration, and positive self-esteem necessary for a lifetime through a systematic environment and scientific materials tailored to the child's critical periods.",
       feature1_title: "Authentic AMS Education",
-      feature1_desc: "We provide an educational environment and curriculum that strictly follows the standards of the American Montessori Society.",
-      feature2_title: "Tailored by Stage",
-      feature2_desc: "We operate 1:1 personalized education programs tailored to the child's age and development speed.",
-      feature3_title: "Parent Education",
-      feature3_desc: "We provide systematic guides for parents to help them understand their children better.",
+      feature1_desc: "We provide an educational environment that strictly adheres to the rigorous standards of the American Montessori Society (AMS). Our curriculum is verified, and our certified professional teachers systematically support your child's growth.",
+      feature2_title: "Tailored by Developmental Stage",
+      feature2_desc: "Every child is different. We reject uniform group lessons and operate a 1:1 Individualized Education Program (IEP) tailored to the child's age, developmental speed, and temperament to maximize learning effects.",
+      feature3_title: "Parent Partnership",
+      feature3_desc: "To ensure consistent Montessori education at home, we provide regular education and counseling for parents, along with guides for setting up the home environment, establishing a true educational partnership.",
     },
     programs: {
       title: "Educational Programs",
-      subtitle: "A step-by-step curriculum that accompanies your child's golden years, from newborns to pre-schoolers.",
+      subtitle: "A step-by-step curriculum designed not to miss the 'Critical Periods' in a child's life, from newborns to pre-schoolers.",
       nido: {
         age: "0-14 months",
         name: "Nido",
-        desc: "Sensory environment helping to build trust and develop gross/fine motor skills.",
+        desc: "We build trust in an environment as comfortable and safe as a mother's embrace. Through mobile activities for sensory development and physical activities for gross/fine motor skills, we assist the healthy development of children meeting the world for the first time.",
       },
       ic: {
         age: "14-36 months",
         name: "IC (Infant Community)",
-        desc: "Independence education supporting the language explosion stage and ego formation.",
+        desc: "This is the period when toddlers start walking and language explodes. Through 'Practical Life' activities, they learn to dress and eat by themselves, fostering independence, and form their ego and social skills through interaction with others.",
       },
       casa: {
         age: "3-6 years",
         name: "Casa (Children's House)",
-        desc: "Integrated education in 5 main areas: Practical Life, Sensory, Language, Math, and Culture.",
+        desc: "This is the period when the absorbent mind is at its peak. Through integrated education in 5 main areas—Practical Life, Sensory, Language, Math, and Culture—children concretize logical thinking and abstract concepts, growing into holistic children with manners and consideration.",
       },
       parenting: {
         age: "All Ages",
         name: "Parent Coaching",
-        desc: "Guide for home Montessori environment setup and interaction.",
+        desc: "Montessori education is completed at home. We provide practical parenting solutions, including how to observe your child, discipline methods suited to their temperament, and how to configure the Montessori environment at home.",
       },
       features: {
         title: "Program Features",
-        f1_title: "1:1 Personalized Education",
-        f1_desc: "Classes are conducted at an individual pace, respecting each child's different developmental speed and interests.",
-        f2_title: "Authentic AMS Materials",
-        f2_desc: "Maximizing sensory learning using high-quality wooden materials that meet AMS certification standards.",
+        f1_title: "1:1 Fully Personalized Education",
+        f1_desc: "We deeply observe each child's different developmental speed and interests, presenting the necessary materials at the most appropriate moment (Presentation).",
+        f2_title: "Premium Authentic AMS Materials",
+        f2_desc: "We use warm-textured wooden materials, not plastic toys. High-quality materials that pass AMS certification standards safely and educationally stimulate the child's senses delicately.",
       }
     },
     montessori: {
@@ -206,11 +206,11 @@ const dictionaries = {
       elements: {
         title: "3 Elements of Montessori",
         child_title: "The Child",
-        child_desc: "The child is the subject of learning. Instead of being injected by adults, children learn by interacting with the environment according to their internal developmental instinct (absorbent mind).",
+        child_desc: "The child is not an empty vessel. They are subjective beings with powerful internal energy to learn and grow on their own, known as the 'Absorbent Mind'. We trust the infinite potential the child possesses.",
         env_title: "Prepared Environment",
-        env_desc: "An environment where tools and furniture that fit the child's developmental stage and body size are neatly organized. Children freely choose their activities here.",
-        director_title: "The Director (Teacher)",
-        director_desc: "The teacher is not a lecturer but a guide who connects the child and the environment. They observe the child and present materials at the appropriate time.",
+        env_desc: "A psychologically stable and orderly space with furniture tailored to the child's eye level and attractive materials suited to their developmental stage. Here, children freely select and explore, developing themselves.",
+        director_title: "The Director",
+        director_desc: "The teacher is not a 'Teacher' who injects knowledge, but a 'Director' who connects the child and the environment. They closely observe the child and intervene at the 'Teachable Moment' to assist growth.",
       },
       quote: {
         text: "The goal of early childhood education should be to activate the child's own natural desire to learn. We must never help a child with a task at which he feels he can succeed.",
@@ -230,26 +230,26 @@ const dictionaries = {
         {
           id: "independence",
           title: "Autonomy and Independence",
-          desc: "Children build confidence by making their own choices and activities.",
-          content: "The core of Montessori education is helping children do it by themselves. In a 'prepared environment', children choose their own activities and complete them, learning achievement and independence. This experience becomes a foundation for leading a self-directed life as an adult."
+          desc: "Through the experience of choosing and doing it themselves, children build strong confidence: 'I Can Do It'.",
+          content: "The core philosophy of Montessori is 'Help me do it by myself'. In a prepared environment, children choose the materials they want, work at their own pace, and even clean up after themselves. This process of acting proactively rather than following adult instructions gives children a deep sense of achievement, becoming a solid foundation for growing into an independent individual who leads a self-directed life."
         },
         {
           id: "concentration",
-          title: "Concentration and Order",
-          desc: "Experience the joy of deep immersion through manipulative activities.",
-          content: "An organized environment and attractive materials draw a child's attention. A key principle of Montessori is not to interrupt a child's 'moment of concentration'. Through this, children develop high levels of focus and naturally learn order by returning materials to their places."
+          title: "Concentration and Flow",
+          desc: "The experience of deep immersion without interruption is the best nourishment for a child's brain development.",
+          content: "Children exhibit amazing concentration when immersed in interesting work. Montessori materials are scientifically designed to stimulate curiosity and provoke challenges. By respecting and protecting the 'moment of flow' when a child is deeply engaged in an activity, the child develops the power to pay attention for a long time and gains inner peace and emotional stability."
         },
         {
           id: "social-emotional",
-          title: "Social and Emotional Development",
-          desc: "Learn a warm heart that respects and cares for others.",
-          content: "Montessori classrooms are often 'mixed-age', where younger children learn from older ones, and older ones help younger ones, fostering a sense of community. They naturally acquire patience and social consideration by waiting for and sharing materials."
+          title: "Social Development and Empathy",
+          desc: "Children learn cooperation instead of competition, fostering warm social skills that respect others.",
+          content: "The Montessori classroom is a small society. In a Mixed Age Group where various ages mingle, younger children learn by watching older ones, and older children naturally learn leadership and caring by helping younger ones. They acquire mature citizenship by learning how to wait for a single material, not to disturb a friend's work, and how to resolve conflicts peacefully in daily life."
         },
         {
           id: "creativity",
           title: "Creative Problem Solving",
-          desc: "Enjoy the process of finding answers instead of fixed ones.",
-          content: "Montessori materials are designed for self-correction. Children discover mistakes and find solutions without adult intervention, naturally developing critical thinking and creative problem-solving skills."
+          desc: "Instead of memorizing fixed answers, children realize principles and find solutions on their own.",
+          content: "Most Montessori materials have a built-in 'Control of Error' function. Children realize they have made a mistake during the activity and go through the process of correcting it themselves without the teacher's pointing it out. In the process of finding answers through various attempts without fearing failure, children naturally acquire critical thinking and creative problem-solving skills."
         }
       ]
     },

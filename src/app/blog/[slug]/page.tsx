@@ -1,0 +1,60 @@
+import { getPostData, getAllPostIds } from "@/lib/posts"
+import { MDXRemote } from "next-mdx-remote/rsc"
+import Link from "next/link"
+import { Metadata } from "next"
+
+type Props = {
+  params: { slug: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const postData = await getPostData(params.slug)
+  return {
+    title: `${postData.title} | Montessori Blog`,
+    description: postData.description,
+  }
+}
+
+export async function generateStaticParams() {
+  const paths = getAllPostIds()
+  return paths.map((path) => ({
+    slug: path.params.slug,
+  }))
+}
+
+export default async function BlogPost({ params }: Props) {
+  const postData = await getPostData(params.slug)
+
+  return (
+    <article className="min-h-screen pt-32 pb-20 bg-stone-50">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Link
+          href="/blog"
+          className="inline-flex items-center text-stone-500 hover:text-stone-900 mb-8 transition-colors"
+        >
+          <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Blog
+        </Link>
+
+        <header className="mb-12">
+          <time className="text-stone-500 block mb-4">{postData.date}</time>
+          <h1 className="text-3xl sm:text-4xl font-bold text-stone-900 mb-6 leading-tight">
+            {postData.title}
+          </h1>
+          <p className="text-xl text-stone-600 leading-relaxed font-light border-l-4 border-stone-200 pl-4 bg-white/50 p-4 rounded-r-lg">
+            {postData.description}
+          </p>
+        </header>
+
+        <div className="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-stone-100">
+          <div className="prose prose-stone prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-stone-900 hover:prose-a:text-stone-600 prose-img:rounded-xl">
+            {/* @ts-expect-error Server Component */}
+            <MDXRemote source={postData.content} />
+          </div>
+        </div>
+      </div>
+    </article>
+  )
+}
