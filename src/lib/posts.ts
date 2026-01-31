@@ -49,6 +49,11 @@ export function getSortedPostsData(): PostData[] {
   })
 }
 
+export function getLatestPostsData(count: number = 3): PostData[] {
+  const allPostsData = getSortedPostsData()
+  return allPostsData.slice(0, count)
+}
+
 export function getAllPostIds() {
   if (!fs.existsSync(postsDirectory)) {
     return []

@@ -29,6 +29,12 @@ const dictionaries = {
       feature3_title: "부모 교육 파트너십",
       feature3_desc: "가정에서도 일관성 있는 몬테소리 교육이 이어질 수 있도록, 부모님을 위한 정기적인 교육과 상담, 가정 내 환경 구성 가이드를 제공하여 진정한 교육 파트너십을 구축합니다.",
     },
+    blog: {
+      title: "최신 블로그 소식",
+      subtitle: "몬테소리 전문가가 전하는 아이 교육 정보",
+      viewAll: "전체보기",
+      readMore: "더 읽어보기",
+    },
     programs: {
       title: "교육 프로그램",
       subtitle: "신생아부터 학령기 전 아동까지, 아이의 인생에서 가장 중요한 '결정적 시기(Critical Periods)'를 놓치지 않도록 설계된 단계별 커리큘럼입니다.",
@@ -162,6 +168,12 @@ const dictionaries = {
       feature2_desc: "Every child is different. We reject uniform group lessons and operate a 1:1 Individualized Education Program (IEP) tailored to the child's age, developmental speed, and temperament to maximize learning effects.",
       feature3_title: "Parent Partnership",
       feature3_desc: "To ensure consistent Montessori education at home, we provide regular education and counseling for parents, along with guides for setting up the home environment, establishing a true educational partnership.",
+    },
+    blog: {
+      title: "Latest Blog Posts",
+      subtitle: "Educational tips for children from Montessori experts",
+      viewAll: "View All",
+      readMore: "Read More",
     },
     programs: {
       title: "Educational Programs",
