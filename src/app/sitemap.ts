@@ -7,6 +7,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getSortedPostsData();
   const dict = getDictionary("ko");
 
+  const staticRoutes: MetadataRoute.Sitemap = [
+    { path: "", priority: 1 },
+    { path: "/montessori", priority: 0.8 },
+    { path: "/programs", priority: 0.8 },
+    { path: "/benefits", priority: 0.8 },
+    { path: "/blog", priority: 0.9, changeFrequency: "weekly" as const },
+    { path: "/contact", priority: 0.5 },
+    { path: "/privacy", priority: 0.3 },
+    { path: "/terms", priority: 0.3 },
+  ].map((route) => ({
+    url: `${baseUrl}${route.path}`,
+    lastModified: new Date(),
+    changeFrequency: route.changeFrequency || ("monthly" as const),
+    priority: route.priority,
+  }));
+
   const blogPosts = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.id}`,
     lastModified: new Date(post.date),
@@ -21,56 +37,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const routes = [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/montessori`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/programs`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/benefits`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/privacy`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/terms`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.3,
-    },
-  ];
-
-  return [...routes, ...benefitRoutes, ...blogPosts];
+  return [...staticRoutes, ...benefitRoutes, ...blogPosts];
 }

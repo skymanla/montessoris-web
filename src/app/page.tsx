@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import HomeClient from "./HomeClient"
+import { getLatestPostsData } from "@/lib/posts"
 
 export const metadata: Metadata = {
   title: "홈 | Montessori",
@@ -7,5 +8,6 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  return <HomeClient />
+  const latestPosts = getLatestPostsData(3)
+  return <HomeClient latestPosts={latestPosts} />
 }
