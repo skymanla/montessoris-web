@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import BenefitsClient from "./BenefitsClient"
+import BenefitsClient from "@/features/benefits/BenefitsClient"
 
 export const metadata: Metadata = {
   title: "몬테소리 교육의 장점 | Montessori",

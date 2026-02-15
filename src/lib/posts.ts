@@ -1,16 +1,19 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { z } from 'zod'
 
 const postsDirectory = path.join(process.cwd(), 'src/posts')
 
-export type PostData = {
+const PostFrontmatterSchema = z.object({
+  date: z.string(),
+  title: z.string(),
+  description: z.string(),
+})
+
+export type PostData = z.infer<typeof PostFrontmatterSchema> & {
   id: string
-  date: string
-  title: string
-  description: string
   content?: string
-  [key: string]: string | undefined
 }
 
 export function getSortedPostsData(): PostData[] {
@@ -31,11 +34,14 @@ export function getSortedPostsData(): PostData[] {
 
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents)
+    
+    // Validate frontmatter
+    const validatedData = PostFrontmatterSchema.parse(matterResult.data)
 
     // Combine the data with the id
     return {
       id,
-      ...(matterResult.data as { date: string; title: string; description: string }),
+      ...validatedData,
     }
   })
 
@@ -81,11 +87,14 @@ export async function getPostData(id: string): Promise<PostData> {
 
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents)
+  
+  // Validate frontmatter
+  const validatedData = PostFrontmatterSchema.parse(matterResult.data)
 
   // Combine the data with the id and content
   return {
     id,
     content: matterResult.content,
-    ...matterResult.data as { date: string; title: string; description: string },
+    ...validatedData,
   }
 }

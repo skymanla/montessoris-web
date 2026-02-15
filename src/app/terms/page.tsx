@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import TermsClient from "./TermsClient"
+import TermsClient from "@/features/legal/TermsClient"
 
 export const metadata: Metadata = {
   title: "이용약관 | Montessori",

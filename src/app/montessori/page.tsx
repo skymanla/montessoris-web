@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import MontessoriClient from "./MontessoriClient"
+import MontessoriClient from "@/features/montessori/MontessoriClient"
 
 export const metadata: Metadata = {
   title: "몬테소리란? | Montessori",

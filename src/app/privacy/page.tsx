@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import PrivacyClient from "./PrivacyClient"
+import PrivacyClient from "@/features/legal/PrivacyClient"
 
 export const metadata: Metadata = {
   title: "개인정보처리방침 | Montessori",

@@ -1,6 +1,6 @@
 
 import { Metadata } from "next"
-import ProgramsClient from "./ProgramsClient"
+import ProgramsClient from "@/features/programs/ProgramsClient"
 
 export const metadata: Metadata = {
   title: "프로그램 | Montessori",
