@@ -26,9 +26,13 @@ export default function PrivacyClient() {
                 <li>고객 문의에 대한 답변 및 상담 서비스 제공</li>
               </ul>
 
-              <h2 className="text-xl font-bold text-stone-800 mt-8">3. 광고 및 쿠키 사용</h2>
-              <p>본 사이트는 구글 애드센스(Google AdSense)를 통해 광고를 게재할 수 있습니다. 구글은 사용자의 웹사이트 방문 기록을 바탕으로 광고를 제공하기 위해 쿠키(Cookie)를 사용합니다.</p>
-              <p>사용자는 구글 광고 설정 페이지를 방문하여 맞춤설정 광고를 해제할 수 있습니다.</p>
+              <h2 className="text-xl font-bold text-stone-800 mt-8">3. 광고 및 쿠키(Cookie) 사용 안내</h2>
+              <p>본 사이트는 구글 애드센스(Google AdSense)를 통해 광고를 게재하며, 이를 위해 다음과 같이 쿠키를 사용합니다.</p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li><strong>쿠키의 사용:</strong> 구글을 포함한 제3자 제공업체는 사용자의 이전 웹사이트 방문 기록을 바탕으로 광고를 게재하기 위해 쿠키를 사용합니다.</li>
+                <li><strong>광고 개인화:</strong> 구글의 광고 쿠키 사용을 통해 구글 및 파트너사는 본 사이트 및 인터넷상의 다른 사이트 방문 기록을 토대로 사용자에게 맞춤형 광고를 제공할 수 있습니다.</li>
+                <li><strong>거부 방법:</strong> 사용자는 <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="underline text-stone-900">구글 광고 설정</a>을 방문하여 맞춤설정 광고를 해제할 수 있습니다. 또는 <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" className="underline text-stone-900">www.aboutads.info</a>를 방문하여 제3자 제공업체의 맞춤설정 광고용 쿠키 사용을 차단할 수 있습니다.</li>
+              </ul>
 
               <h2 className="text-xl font-bold text-stone-800 mt-8">4. 개인정보의 보유 및 이용기간</h2>
               <p>원칙적으로 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 관계법령의 규정에 의하여 보존할 필요가 있는 경우 일정 기간 보관합니다.</p>
@@ -50,8 +54,12 @@ export default function PrivacyClient() {
               </ul>
 
               <h2 className="text-xl font-bold text-stone-800 mt-8">3. Advertising and Cookies</h2>
-              <p>This website may use Google AdSense to serve ads. Google uses cookies to serve ads based on a user&apos;s prior visits to your website or other websites.</p>
-              <p>Users may opt out of personalized advertising by visiting Google Ads Settings.</p>
+              <p>This website uses Google AdSense to serve advertisements. Here is how cookies are used in this process:</p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li><strong>Third-party Vendors:</strong> Third-party vendors, including Google, use cookies to serve ads based on a user&apos;s prior visits to your website or other websites.</li>
+                <li><strong>Personalized Advertising:</strong> Google&apos;s use of advertising cookies enables it and its partners to serve ads to your users based on their visit to your sites and/or other sites on the Internet.</li>
+                <li><strong>Opt-out:</strong> Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="underline text-stone-900">Ads Settings</a>. Alternatively, you can opt out of a third-party vendor&apos;s use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" className="underline text-stone-900">www.aboutads.info</a>.</li>
+              </ul>
 
               <h2 className="text-xl font-bold text-stone-800 mt-8">4. Data Retention</h2>
               <p>We will retain your personal information only for as long as is necessary for the purposes set out in this Privacy Policy.</p>

@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import ContactClient from "./ContactClient"
+import ContactClient from "@/features/contact/ContactClient"
 
 export const metadata: Metadata = {
   title: "문의하기 | Montessori",

@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import HomeClient from "./HomeClient"
+import HomeClient from "@/features/home/HomeClient"
 import { getLatestPostsData } from "@/lib/posts"
 
 export const metadata: Metadata = {
