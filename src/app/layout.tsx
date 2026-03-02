@@ -76,7 +76,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-stone-50 text-stone-900`}
       >
-        <GoogleAdsense pId={process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID!} />
+        <GoogleAdsense pId="ca-pub-1586372003132738" />
         <LocaleProvider>
           <Header />
           {children}
