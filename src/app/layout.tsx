@@ -5,6 +5,7 @@ import Footer from "@/components/Footer"
 import GoogleAdsense from "@/components/GoogleAdsense"
 import "./globals.css"
 import { LocaleProvider } from "@/components/LocaleContext"
+import CounselWidget from "@/features/counsel/CounselWidget"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -81,6 +82,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <CounselWidget />
         </LocaleProvider>
       </body>
     </html>
