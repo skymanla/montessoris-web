@@ -6,6 +6,7 @@ import GoogleAdsense from "@/components/GoogleAdsense"
 import "./globals.css"
 import { LocaleProvider } from "@/components/LocaleContext"
 import CounselWidget from "@/features/counsel/CounselWidget"
+import { GoogleTagManager } from "@next/third-parties/google"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -74,6 +75,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <GoogleTagManager gtmId="GTM-PZRT52KL" />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-stone-50 text-stone-900`}
       >
