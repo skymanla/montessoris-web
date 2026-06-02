@@ -6,6 +6,7 @@ import GoogleAdsense from "@/components/GoogleAdsense"
 import "./globals.css"
 import { LocaleProvider } from "@/components/LocaleContext"
 import CounselWidget from "@/features/counsel/CounselWidget"
+import Script from "next/script"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -74,9 +75,34 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        {/* Google Tag Manager */}
+        <Script
+          id="gtm-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PZRT52KL');`,
+          }}
+        />
+        {/* End Google Tag Manager */}
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-stone-50 text-stone-900`}
       >
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-PZRT52KL"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
         <GoogleAdsense pId="ca-pub-1586372003132738" />
         <LocaleProvider>
           <Header />
