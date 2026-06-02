@@ -45,6 +45,15 @@ function CounselPanel({ onClose }: { onClose: () => void }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const isBusy = status === 'thinking' || status === 'restoring'
 
+  // 모바일/브라우저 배경 스크롤 방지
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = originalOverflow
+    }
+  }, [])
+
   useLayoutEffect(() => {
     const el = listRef.current
     if (el) el.scrollTop = el.scrollHeight
@@ -88,7 +97,7 @@ function CounselPanel({ onClose }: { onClose: () => void }) {
       role="dialog"
       aria-modal="true"
       aria-label="몬테소리스 상담"
-      className={`${styles.sheetUp} fixed inset-0 z-[90] flex flex-col bg-stone-50 sm:inset-auto sm:bottom-5 sm:right-5 sm:h-[600px] sm:max-h-[85vh] sm:w-[380px] sm:overflow-hidden sm:rounded-3xl sm:border sm:border-stone-200 sm:shadow-2xl`}
+      className={`${styles.sheetUp} overscroll-contain fixed inset-0 z-[90] flex flex-col bg-stone-50 sm:inset-auto sm:bottom-5 sm:right-5 sm:h-[600px] sm:max-h-[85vh] sm:w-[380px] sm:overflow-hidden sm:rounded-3xl sm:border sm:border-stone-200 sm:shadow-2xl`}
     >
       {/* 헤더 */}
       <header className="flex items-center gap-3 border-b border-stone-200 bg-white/90 px-4 py-3 backdrop-blur-sm">
@@ -122,7 +131,7 @@ function CounselPanel({ onClose }: { onClose: () => void }) {
       </header>
 
       {/* 메시지 */}
-      <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
+      <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto overscroll-contain px-4 py-4">
         {messages.map((m) => (
           <Bubble key={m.id} role={m.role} isError={m.isError}>
             {m.content}
