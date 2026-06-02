@@ -7,6 +7,8 @@ import "./globals.css"
 import { LocaleProvider } from "@/components/LocaleContext"
 import CounselWidget from "@/features/counsel/CounselWidget"
 
+console.log(1) // deploy smoke test (확인 후 제거)
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
