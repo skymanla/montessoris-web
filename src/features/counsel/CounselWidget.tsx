@@ -60,7 +60,6 @@ function CounselPanel({ onClose }: { onClose: () => void }) {
   }, [messages, status])
 
   useEffect(() => {
-    textareaRef.current?.focus()
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
