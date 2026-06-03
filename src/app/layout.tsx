@@ -79,6 +79,11 @@ export const metadata: Metadata = {
   other: {
     "google-adsense-account": "ca-pub-1586372003132738",
   },
+  verification: {
+    other: {
+      "naver-site-verification": "ca09bbfa2269181a0351ef541e4c00135b2265f5",
+    },
+  },
 }
 
 export default function RootLayout({
