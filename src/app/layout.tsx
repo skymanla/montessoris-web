@@ -73,21 +73,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const isProduction = process.env.NODE_ENV === "production"
+
   return (
     <html lang="ko">
-      <GoogleTagManager gtmId="GTM-PZRT52KL" />
+      {isProduction && <GoogleTagManager gtmId="GTM-PZRT52KL" />}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-stone-50 text-stone-900`}
       >
         {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PZRT52KL"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
+        {isProduction && (
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-PZRT52KL"
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
         {/* End Google Tag Manager (noscript) */}
         <GoogleAdsense pId="ca-pub-1586372003132738" />
         <LocaleProvider>
