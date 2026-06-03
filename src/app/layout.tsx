@@ -4,7 +4,6 @@ import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import GoogleAdsense from "@/components/GoogleAdsense"
 import "./globals.css"
-import { LocaleProvider } from "@/components/LocaleContext"
 import CounselWidget from "@/features/counsel/CounselWidget"
 import { GoogleTagManager } from "@next/third-parties/google"
 import { absoluteUrl, siteConfig } from "@/lib/site"
@@ -12,11 +11,6 @@ import { absoluteUrl, siteConfig } from "@/lib/site"
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
-  weight: "100 900",
-})
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
   weight: "100 900",
 })
 
@@ -53,8 +47,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: absoluteUrl(siteConfig.ogImage),
-        width: 4032,
-        height: 3024,
+        width: 1600,
+        height: 1200,
         alt: "낮은 원목 교구장과 아동용 가구가 배치된 몬테소리 교실",
       },
     ],
@@ -79,6 +73,12 @@ export const metadata: Metadata = {
   other: {
     "google-adsense-account": "ca-pub-1586372003132738",
   },
+  verification: {
+    google: siteConfig.verification.google || undefined,
+    other: siteConfig.verification.naver
+      ? { "naver-site-verification": siteConfig.verification.naver }
+      : undefined,
+  },
 }
 
 export default function RootLayout({
@@ -92,8 +92,14 @@ export default function RootLayout({
     <html lang="ko">
       {isProduction && <GoogleTagManager gtmId="GTM-PZRT52KL" />}
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-stone-50 text-stone-900`}
+        className={`${geistSans.variable} antialiased bg-stone-50 text-stone-900`}
       >
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link
+          rel="preconnect"
+          href="https://pagead2.googlesyndication.com"
+          crossOrigin="anonymous"
+        />
         {/* Google Tag Manager (noscript) */}
         {isProduction && (
           <noscript>
@@ -107,12 +113,10 @@ export default function RootLayout({
         )}
         {/* End Google Tag Manager (noscript) */}
         <GoogleAdsense pId="ca-pub-1586372003132738" />
-        <LocaleProvider>
-          <Header />
-          {children}
-          <Footer />
-          <CounselWidget />
-        </LocaleProvider>
+        <Header />
+        {children}
+        <Footer />
+        <CounselWidget />
       </body>
     </html>
   )

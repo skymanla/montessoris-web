@@ -23,6 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       url: `/blog/${params.slug}`,
       publishedTime: postData.date,
+      images: ["/images/edu-rooms/TalkMedia_i_88239f1cd4c2.jpeg.jpeg"],
     },
   }
 }
@@ -58,7 +59,7 @@ export default async function BlogPost({ params }: Props) {
             <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Back to Blog
+            블로그 목록으로
           </Link>
 
           <header className="mb-12">
