@@ -2,9 +2,15 @@
 
 import Link from "next/link"
 import { useLocale } from "./LocaleContext"
+import { usePathname } from "next/navigation"
 
 export default function Footer() {
   const { dict } = useLocale()
+  const pathname = usePathname()
+
+  if (pathname === "/counsel") {
+    return null
+  }
 
   return (
     <footer className="bg-stone-900 text-stone-400 py-12">
