@@ -2,9 +2,21 @@ import Link from "next/link"
 import { getSortedPostsData } from "@/lib/posts"
 import { Metadata } from "next"
 
+const title = "몬테소리 교육 블로그"
+const description =
+  "몬테소리 철학, 교구 선택, 집에서 실천하는 준비된 환경, 유치원 비교까지 부모를 위한 교육 글을 모았습니다."
+
 export const metadata: Metadata = {
-  title: "블로그 | Montessori",
-  description: "몬테소리 교육에 대한 깊이 있는 이야기와 유용한 육아 정보를 만나보세요.",
+  title,
+  description,
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title,
+    description,
+    url: "/blog",
+  },
 }
 
 export default function BlogPage() {

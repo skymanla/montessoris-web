@@ -1,9 +1,21 @@
 import { Metadata } from "next"
 import ContactClient from "@/features/contact/ContactClient"
 
+const title = "몬테소리 교육 문의"
+const description =
+  "몬테소리 교육 프로그램, 부모 코칭, 가정 내 준비된 환경 구성에 대한 문의를 남겨주세요."
+
 export const metadata: Metadata = {
-  title: "문의하기 | Montessori",
-  description: "몬테소리 교육 프로그램에 대해 궁금하신 점이 있으시면 언제든 문의해 주세요.",
+  title,
+  description,
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title,
+    description,
+    url: "/contact",
+  },
 }
 
 export default function ContactPage() {

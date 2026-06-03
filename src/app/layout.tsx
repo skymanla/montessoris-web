@@ -7,6 +7,7 @@ import "./globals.css"
 import { LocaleProvider } from "@/components/LocaleContext"
 import CounselWidget from "@/features/counsel/CounselWidget"
 import { GoogleTagManager } from "@next/third-parties/google"
+import { absoluteUrl, siteConfig } from "@/lib/site"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -20,16 +21,19 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
-// ... 생략 (기존 메타데이터 유지)
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "몬테소리 | Montessori",
-    template: "%s | 몬테소리"
+    default: `${siteConfig.name} | AMS 몬테소리 유아교육과 부모 코칭`,
+    template: `%s | ${siteConfig.name}`,
   },
-  description: "아이의 잠재력을 깨우는 정통 AMS 몬테소리 교육. 엄마와 아이가 함께 성장하는 특별한 시간을 만나보세요.",
-  keywords: ["몬테소리", "Montessori", "AMS 몬테소리", "유아 교육", "부모 교육", "정통 몬테소리", "아이 중심 교육"],
-  authors: [{ name: "Montessori" }],
-  creator: "Montessori",
-  publisher: "Montessori",
+  description: siteConfig.description,
+  keywords: ["몬테소리", "AMS 몬테소리", "유아 교육", "부모 코칭", "준비된 환경", "몬테소리 교구"],
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/icon.png",
     apple: "/icon.png",
@@ -40,17 +44,26 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "몬테소리 | Montessori",
-    description: "아이의 잠재력을 깨우는 정통 AMS 몬테소리 교육",
-    url: "https://montessoris.net",
-    siteName: "몬테소리",
-    locale: "ko_KR",
+    title: `${siteConfig.name} | AMS 몬테소리 유아교육과 부모 코칭`,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
     type: "website",
+    images: [
+      {
+        url: absoluteUrl(siteConfig.ogImage),
+        width: 4032,
+        height: 3024,
+        alt: "낮은 원목 교구장과 아동용 가구가 배치된 몬테소리 교실",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "몬테소리 | Montessori",
-    description: "아이의 잠재력을 깨우는 정통 AMS 몬테소리 교육",
+    title: `${siteConfig.name} | AMS 몬테소리 유아교육과 부모 코칭`,
+    description: siteConfig.description,
+    images: [absoluteUrl(siteConfig.ogImage)],
   },
   robots: {
     index: true,
