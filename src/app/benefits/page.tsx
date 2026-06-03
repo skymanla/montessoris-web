@@ -1,9 +1,21 @@
 import { Metadata } from "next"
 import BenefitsClient from "@/features/benefits/BenefitsClient"
 
+const title = "몬테소리 교육 효과와 장점"
+const description =
+  "몬테소리 교육이 자율성, 독립심, 집중력, 사회성, 문제 해결력 발달에 어떤 도움을 주는지 구체적으로 알아보세요."
+
 export const metadata: Metadata = {
-  title: "몬테소리 교육의 장점 | Montessori",
-  description: "자율성, 독립심, 집중력, 사회성, 창의성 등 아이의 무한한 잠재력을 깨우는 몬테소리 교육의 특별한 장점을 알아보세요.",
+  title,
+  description,
+  alternates: {
+    canonical: "/benefits",
+  },
+  openGraph: {
+    title,
+    description,
+    url: "/benefits",
+  },
 }
 
 export default function BenefitsPage() {

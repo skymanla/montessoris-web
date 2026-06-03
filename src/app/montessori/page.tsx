@@ -1,9 +1,21 @@
 import { Metadata } from "next"
 import MontessoriClient from "@/features/montessori/MontessoriClient"
 
+const title = "몬테소리 교육이란? 철학과 준비된 환경"
+const description =
+  "마리아 몬테소리의 교육 철학, 준비된 환경, 아이 중심 관찰, 교사의 역할을 부모가 이해하기 쉽게 정리했습니다."
+
 export const metadata: Metadata = {
-  title: "몬테소리란? | Montessori",
-  description: "마리아 몬테소리 박사의 철학과 정통 몬테소리 교육의 3요소(아이, 환경, 교사)에 대해 알아보세요.",
+  title,
+  description,
+  alternates: {
+    canonical: "/montessori",
+  },
+  openGraph: {
+    title,
+    description,
+    url: "/montessori",
+  },
 }
 
 export default function MontessoriPage() {

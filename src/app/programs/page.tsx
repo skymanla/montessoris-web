@@ -2,9 +2,21 @@
 import { Metadata } from "next"
 import ProgramsClient from "@/features/programs/ProgramsClient"
 
+const title = "0-6세 몬테소리 프로그램과 부모 코칭"
+const description =
+  "Nido, Infant Community, Casa 단계별 몬테소리 교육과 부모 코칭을 통해 아이의 결정적 시기에 맞는 환경 구성을 안내합니다."
+
 export const metadata: Metadata = {
-  title: "프로그램 | Montessori",
-  description: "정통 AMS 몬테소리 프로그램: Nido(0-14개월), IC(14-36개월), Casa(3-6세) 및 부모 코칭. 아이의 결정적 시기를 위한 맞춤형 교육 커리큘럼을 만나보세요.",
+  title,
+  description,
+  alternates: {
+    canonical: "/programs",
+  },
+  openGraph: {
+    title,
+    description,
+    url: "/programs",
+  },
 }
 
 export default function ProgramsPage() {

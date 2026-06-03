@@ -4,9 +4,18 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 const images = [
-  '/images/edu-rooms/TalkMedia_i_88239f1cd4c2.jpeg.jpeg',
-  '/images/edu-rooms/TalkMedia_i_d4b60b5d655e.jpeg.jpeg',
-  '/images/edu-rooms/TalkMedia_i_ad28d9c948ac.jpeg.jpeg',
+  {
+    src: '/images/edu-rooms/TalkMedia_i_88239f1cd4c2.jpeg.jpeg',
+    alt: '창가 아래 낮은 원목 교구장과 아동용 가구가 놓인 몬테소리 교실',
+  },
+  {
+    src: '/images/edu-rooms/TalkMedia_i_d4b60b5d655e.jpeg.jpeg',
+    alt: '원목 교구와 작은 책상이 정돈된 밝은 몬테소리 활동 공간',
+  },
+  {
+    src: '/images/edu-rooms/TalkMedia_i_ad28d9c948ac.jpeg.jpeg',
+    alt: '수 감각 교구와 낮은 선반이 배치된 몬테소리 교실 전경',
+  },
 ]
 
 export default function ImageSlider() {
@@ -29,16 +38,16 @@ export default function ImageSlider() {
 
   return (
     <div className="relative w-full h-full group overflow-hidden rounded-2xl shadow-xl">
-      {images.map((src, index) => (
+      {images.map((image, index) => (
         <div
-          key={src}
+          key={image.src}
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
             index === currentIndex ? 'opacity-100' : 'opacity-0'
           }`}
         >
           <Image
-            src={src}
-            alt={`몬테소리 교실 이미지 ${index + 1}`}
+            src={image.src}
+            alt={image.alt}
             fill
             className="object-cover"
             priority={index === 0}
