@@ -10,7 +10,7 @@ export const siteConfig = {
   // 검색엔진 소유확인 토큰: 등록 후 발급받은 값을 채우면 자동으로 <meta>가 출력된다.
   verification: {
     google: "", // Google Search Console
-    naver: "", // 네이버 서치어드바이저
+    naver: "ca09bbfa2269181a0351ef541e4c00135b2265f5", // 네이버 서치어드바이저
   },
 }
 
