@@ -22,6 +22,7 @@ export function generateMetadata({ params }: Props): Metadata {
       title: benefit?.title || "몬테소리 교육 장점 상세",
       description: benefit?.desc || "몬테소리 교육의 구체적인 장점에 대해 자세히 알아보세요.",
       url: `/benefits/${params.id}`,
+      images: ["/images/edu-rooms/TalkMedia_i_88239f1cd4c2.jpeg.jpeg"],
     },
   }
 }

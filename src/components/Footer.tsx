@@ -24,17 +24,17 @@ export default function Footer() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
             <div className="space-y-3 text-sm">
-              <h4 className="text-white font-semibold mb-4 uppercase tracking-wider">Quick Links</h4>
+              <h4 className="text-white font-semibold mb-4 uppercase tracking-wider">바로가기</h4>
               <Link href="/montessori" className="block hover:text-white transition-colors">{dict.header.about}</Link>
               <Link href="/benefits" className="block hover:text-white transition-colors">{dict.header.benefits}</Link>
               <Link href="/programs" className="block hover:text-white transition-colors">{dict.header.programs}</Link>
             </div>
             <div className="space-y-3 text-sm">
-              <h4 className="text-white font-semibold mb-4 uppercase tracking-wider">Support</h4>
+              <h4 className="text-white font-semibold mb-4 uppercase tracking-wider">고객지원</h4>
               <Link href="/contact" className="block hover:text-white transition-colors">{dict.footer.contact}</Link>
             </div>
             <div className="space-y-3 text-sm">
-              <h4 className="text-white font-semibold mb-4 uppercase tracking-wider">Legal</h4>
+              <h4 className="text-white font-semibold mb-4 uppercase tracking-wider">약관</h4>
               <Link href="/privacy" className="block hover:text-white transition-colors">{dict.footer.privacy}</Link>
               <Link href="/terms" className="block hover:text-white transition-colors">{dict.footer.terms}</Link>
             </div>

@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: "/blog",
+    images: ["/images/edu-rooms/TalkMedia_i_88239f1cd4c2.jpeg.jpeg"],
   },
 }
 
@@ -26,7 +27,7 @@ export default function BlogPage() {
     <div className="min-h-screen pt-32 pb-20 bg-stone-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h1 className="text-3xl font-bold text-stone-900 mb-4">Blog</h1>
+          <h1 className="text-3xl font-bold text-stone-900 mb-4">블로그</h1>
           <p className="text-stone-600 max-w-2xl mx-auto">
             몬테소리 교육의 철학과 실천 방법, 그리고 아이들과 함께하는 일상의 이야기를 나눕니다.
           </p>
@@ -48,7 +49,7 @@ export default function BlogPage() {
                   {description}
                 </p>
                 <div className="mt-6 flex items-center text-stone-800 font-medium group-hover:underline">
-                  Read more
+                  자세히 보기
                   <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
