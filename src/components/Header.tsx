@@ -3,10 +3,16 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useLocale } from "@/components/LocaleContext"
+import { usePathname } from "next/navigation"
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const { locale, dict, setLocale } = useLocale()
+  const pathname = usePathname()
+
+  if (pathname === "/counsel") {
+    return null
+  }
 
   const toggleMenu = () => {
     setIsOpen(!isOpen)

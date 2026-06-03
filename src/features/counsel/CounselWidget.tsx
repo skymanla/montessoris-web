@@ -3,11 +3,12 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styles from './CounselWidget.module.css'
 import { useChatSession } from './useChatSession'
+import { usePathname, useRouter } from 'next/navigation'
 
 /**
  * 몬테소리스 상담 위젯.
  * - 모든 페이지 우하단에 떠 있는 런처 → 탭하면 상담 패널이 열린다.
- * - 모바일: 전체 화면 시트 / sm 이상: 우하단 카드.
+ * - 모바일: /counsel 페이지로 이동 / sm 이상: 우하단 카드 팝업.
  * - 페르소나 '마리' — 아이를 차분히 관찰하도록 돕는 몬테소리 길잡이.
  * - 사이트의 stone 팔레트 + 세이지 그린(#5f8d76) 악센트로 차분한 자연 톤.
  * - 추가 의존성 없이 CSS Module 애니메이션만 사용(전역 CSS 비오염).
@@ -16,9 +17,34 @@ const SAGE = '#5f8d76'
 
 export default function CounselWidget() {
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  if (pathname === '/counsel') {
+    return null
+  }
+
+  const handleOpen = () => {
+    if (isMobile) {
+      router.push('/counsel')
+    } else {
+      setOpen(true)
+    }
+  }
+
   return (
     <>
-      {!open && <Launcher onOpen={() => setOpen(true)} />}
+      {!open && <Launcher onOpen={handleOpen} />}
       {open && <CounselPanel onClose={() => setOpen(false)} />}
     </>
   )
@@ -38,21 +64,29 @@ function Launcher({ onOpen }: { onOpen: () => void }) {
   )
 }
 
-function CounselPanel({ onClose }: { onClose: () => void }) {
+export function CounselPanel({
+  onClose,
+  isPage = false,
+}: {
+  onClose?: () => void
+  isPage?: boolean
+}) {
+  const router = useRouter()
   const { messages, status, send, reset } = useChatSession()
   const [value, setValue] = useState('')
   const listRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const isBusy = status === 'thinking' || status === 'restoring'
 
-  // 모바일/브라우저 배경 스크롤 방지
+  // 모바일/브라우저 배경 스크롤 방지 (모달일 때만)
   useEffect(() => {
+    if (isPage) return
     const originalOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     return () => {
       document.body.style.overflow = originalOverflow
     }
-  }, [])
+  }, [isPage])
 
   useLayoutEffect(() => {
     const el = listRef.current
@@ -61,7 +95,7 @@ function CounselPanel({ onClose }: { onClose: () => void }) {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key === 'Escape' && onClose) onClose()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -71,7 +105,9 @@ function CounselPanel({ onClose }: { onClose: () => void }) {
     const el = textareaRef.current
     if (!el) return
     el.style.height = 'auto'
-    el.style.height = Math.min(el.scrollHeight, 120) + 'px'
+    const newHeight = Math.min(el.scrollHeight, 120)
+    el.style.height = newHeight + 'px'
+    el.style.overflowY = el.scrollHeight > 120 ? 'auto' : 'hidden'
   }, [value])
 
   const submit = (text?: string) => {
@@ -88,18 +124,40 @@ function CounselPanel({ onClose }: { onClose: () => void }) {
     }
   }
 
+  const handleClose = () => {
+    if (onClose) {
+      onClose()
+    } else {
+      router.back()
+    }
+  }
+
   const lastAssistant = [...messages].reverse().find((m) => m.role === 'assistant')
   const followUps = !isBusy && lastAssistant?.followUps ? lastAssistant.followUps : []
 
+  const containerClasses = isPage
+    ? 'w-full h-[100dvh] sm:h-[650px] sm:max-h-[85vh] sm:w-[500px] sm:rounded-3xl sm:border sm:border-stone-200 sm:shadow-2xl flex flex-col bg-stone-50 overflow-hidden'
+    : `${styles.sheetUp} overscroll-contain fixed inset-0 z-[90] flex flex-col bg-stone-50 sm:inset-auto sm:bottom-5 sm:right-5 sm:h-[600px] sm:max-h-[85vh] sm:w-[380px] sm:overflow-hidden sm:rounded-3xl sm:border sm:border-stone-200 sm:shadow-2xl`
+
   return (
     <div
-      role="dialog"
-      aria-modal="true"
+      role={isPage ? undefined : 'dialog'}
+      aria-modal={isPage ? undefined : 'true'}
       aria-label="몬테소리스 상담"
-      className={`${styles.sheetUp} overscroll-contain fixed inset-0 z-[90] flex flex-col bg-stone-50 sm:inset-auto sm:bottom-5 sm:right-5 sm:h-[600px] sm:max-h-[85vh] sm:w-[380px] sm:overflow-hidden sm:rounded-3xl sm:border sm:border-stone-200 sm:shadow-2xl`}
+      className={containerClasses}
     >
       {/* 헤더 */}
       <header className="flex items-center gap-3 border-b border-stone-200 bg-white/90 px-4 py-3 backdrop-blur-sm">
+        {isPage && (
+          <button
+            type="button"
+            onClick={handleClose}
+            aria-label="뒤로 가기"
+            className="mr-1 flex h-8 w-8 items-center justify-center rounded-full text-stone-500 transition-colors hover:bg-stone-100"
+          >
+            <BackIcon />
+          </button>
+        )}
         <CounselorAvatar />
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-bold text-stone-800">마리 · 몬테소리 상담</p>
@@ -119,14 +177,16 @@ function CounselPanel({ onClose }: { onClose: () => void }) {
         >
           새 대화
         </button>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="상담 닫기"
-          className="flex h-8 w-8 items-center justify-center rounded-full text-stone-500 transition-colors hover:bg-stone-100"
-        >
-          <CloseIcon />
-        </button>
+        {!isPage && (
+          <button
+            type="button"
+            onClick={handleClose}
+            aria-label="상담 닫기"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-stone-500 transition-colors hover:bg-stone-100"
+          >
+            <CloseIcon />
+          </button>
+        )}
       </header>
 
       {/* 메시지 */}
@@ -170,7 +230,7 @@ function CounselPanel({ onClose }: { onClose: () => void }) {
             disabled={status === 'restoring'}
             placeholder={status === 'restoring' ? '이전 대화를 불러오는 중…' : '여기에 마음을 적어보세요…'}
             aria-label="상담 메시지 입력"
-            className="max-h-[120px] min-h-[40px] flex-1 resize-none rounded-2xl border border-stone-300 bg-white px-3 py-2 text-sm leading-relaxed text-stone-800 outline-none placeholder:text-stone-400 focus:border-[#5f8d76]"
+            className="max-h-[120px] min-h-[40px] flex-1 resize-none rounded-2xl border border-stone-300 bg-white px-3 py-2 text-sm leading-relaxed text-stone-800 outline-none placeholder:text-stone-400 focus:border-[#5f8d76] overflow-hidden"
           />
           <button
             type="button"
@@ -270,6 +330,14 @@ function CloseIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
       <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function BackIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
