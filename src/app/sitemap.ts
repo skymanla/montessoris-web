@@ -6,6 +6,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://montessoris.net";
   const posts = getSortedPostsData();
   const dict = getDictionary("ko");
+  // 콘텐츠가 거의 고정된 정적/장점 페이지는 매 빌드마다 lastmod가 바뀌지 않도록 고정한다.
+  const staticLastModified = new Date("2026-06-03");
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { path: "", priority: 1 },
@@ -18,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/terms", priority: 0.3 },
   ].map((route) => ({
     url: `${baseUrl}${route.path}`,
-    lastModified: new Date(),
+    lastModified: staticLastModified,
     changeFrequency: route.changeFrequency || ("monthly" as const),
     priority: route.priority,
   }));
@@ -32,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const benefitRoutes = dict.benefits.items.map((item) => ({
     url: `${baseUrl}/benefits/${item.id}`,
-    lastModified: new Date(),
+    lastModified: staticLastModified,
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));

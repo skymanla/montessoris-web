@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: "/contact",
+    images: ["/images/edu-rooms/TalkMedia_i_88239f1cd4c2.jpeg.jpeg"],
   },
 }
 

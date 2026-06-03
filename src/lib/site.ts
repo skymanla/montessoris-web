@@ -7,6 +7,11 @@ export const siteConfig = {
   ogImage: "/images/edu-rooms/TalkMedia_i_88239f1cd4c2.jpeg.jpeg",
   locale: "ko_KR",
   language: "ko-KR",
+  // 검색엔진 소유확인 토큰: 등록 후 발급받은 값을 채우면 자동으로 <meta>가 출력된다.
+  verification: {
+    google: "", // Google Search Console
+    naver: "", // 네이버 서치어드바이저
+  },
 }
 
 export function absoluteUrl(path = "/") {
