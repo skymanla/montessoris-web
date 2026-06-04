@@ -17,7 +17,7 @@ const geistSans = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | AMS 몬테소리 유아교육과 부모 코칭`,
+    default: `${siteConfig.name} | 24H 무료 AI 육아 상담 & 몬테소리 가이드`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: `${siteConfig.name} | AMS 몬테소리 유아교육과 부모 코칭`,
+    title: `${siteConfig.name} | 24H 무료 AI 육아 상담 & 몬테소리 가이드`,
     description: siteConfig.description,
     url: siteConfig.url,
     siteName: siteConfig.name,
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | AMS 몬테소리 유아교육과 부모 코칭`,
+    title: `${siteConfig.name} | 24H 무료 AI 육아 상담 & 몬테소리 가이드`,
     description: siteConfig.description,
     images: [absoluteUrl(siteConfig.ogImage)],
   },
