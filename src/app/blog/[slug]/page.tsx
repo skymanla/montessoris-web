@@ -6,22 +6,23 @@ import JsonLd from "@/components/JsonLd"
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/structured-data"
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const postData = await getPostData(params.slug)
+  const { slug } = await params
+  const postData = await getPostData(slug)
   return {
     title: postData.title,
     description: postData.description,
     alternates: {
-      canonical: `/blog/${params.slug}`,
+      canonical: `/blog/${slug}`,
     },
     openGraph: {
       title: postData.title,
       description: postData.description,
       type: "article",
-      url: `/blog/${params.slug}`,
+      url: `/blog/${slug}`,
       publishedTime: postData.date,
       images: ["/images/edu-rooms/TalkMedia_i_88239f1cd4c2.jpeg.jpeg"],
     },
@@ -36,10 +37,11 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPost({ params }: Props) {
-  const postData = await getPostData(params.slug)
+  const { slug } = await params
+  const postData = await getPostData(slug)
   const allPosts = getSortedPostsData()
   const relatedPosts = allPosts
-    .filter((post) => post.id !== params.slug)
+    .filter((post) => post.id !== slug)
     .slice(0, 3)
   const breadcrumbSchema = breadcrumbJsonLd([
     { name: "홈", path: "/" },

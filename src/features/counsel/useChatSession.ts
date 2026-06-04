@@ -28,7 +28,7 @@ const WELCOME: ChatMessage = {
 export function useChatSession() {
   const [sessionId, setSessionId] = useState<string | null>(() => loadStoredSessionId());
   const [messages, setMessages] = useState<ChatMessage[]>([WELCOME]);
-  const [status, setStatus] = useState<ChatStatus>('idle');
+  const [status, setStatus] = useState<ChatStatus>(sessionId ? 'restoring' : 'idle');
   const [error, setError] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
   const seqRef = useRef(1);
@@ -44,7 +44,6 @@ export function useChatSession() {
     if (!stored) return;
 
     const controller = new AbortController();
-    setStatus('restoring');
     fetchSessionHistory({ sessionId: stored, signal: controller.signal })
       .then((history) => {
         if (controller.signal.aborted) return;

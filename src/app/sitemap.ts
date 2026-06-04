@@ -2,6 +2,8 @@ import { MetadataRoute } from "next";
 import { getSortedPostsData } from "@/lib/posts";
 import { getDictionary } from "@/lib/dictionaries";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://montessoris.net";
   const posts = getSortedPostsData();
