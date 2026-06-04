@@ -16,13 +16,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: postData.title,
     description: postData.description,
     alternates: {
-      canonical: `/blog/${slug}`,
+      canonical: `/blog/${slug}/`,
     },
     openGraph: {
       title: postData.title,
       description: postData.description,
       type: "article",
-      url: `/blog/${slug}`,
+      url: `/blog/${slug}/`,
       publishedTime: postData.date,
       images: ["/images/edu-rooms/TalkMedia_i_88239f1cd4c2.jpeg.jpeg"],
     },
@@ -45,8 +45,8 @@ export default async function BlogPost({ params }: Props) {
     .slice(0, 3)
   const breadcrumbSchema = breadcrumbJsonLd([
     { name: "홈", path: "/" },
-    { name: "블로그", path: "/blog" },
-    { name: postData.title, path: `/blog/${postData.id}` },
+    { name: "블로그", path: "/blog/" },
+    { name: postData.title, path: `/blog/${postData.id}/` },
   ])
 
   return (
