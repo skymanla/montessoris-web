@@ -41,7 +41,7 @@ export function breadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
 }
 
 export function articleJsonLd(post: PostData) {
-  const canonicalPath = `/blog/${post.id}`
+  const canonicalPath = `/blog/${post.id}/`
 
   return {
     "@context": "https://schema.org",

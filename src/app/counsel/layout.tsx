@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "몬테소리 상담",
   description: "몬테소리 교육에 대한 상담 대화 페이지입니다.",
   alternates: {
-    canonical: "/counsel",
+    canonical: "/counsel/",
   },
   robots: {
     index: false,

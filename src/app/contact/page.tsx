@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: {
-    canonical: "/contact",
+    canonical: "/contact/",
   },
   openGraph: {
     title,
     description,
-    url: "/contact",
+    url: "/contact/",
     images: ["/images/edu-rooms/TalkMedia_i_88239f1cd4c2.jpeg.jpeg"],
   },
 }

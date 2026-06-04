@@ -21,21 +21,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/privacy", priority: 0.3 },
     { path: "/terms", priority: 0.3 },
   ].map((route) => ({
-    url: `${baseUrl}${route.path}`,
+    url: `${baseUrl}${route.path}${route.path === "" ? "" : "/"}`,
     lastModified: staticLastModified,
     changeFrequency: route.changeFrequency || ("monthly" as const),
     priority: route.priority,
   }));
 
   const blogPosts = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.id}`,
+    url: `${baseUrl}/blog/${post.id}/`,
     lastModified: new Date(post.date),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
   const benefitRoutes = dict.benefits.items.map((item) => ({
-    url: `${baseUrl}/benefits/${item.id}`,
+    url: `${baseUrl}/benefits/${item.id}/`,
     lastModified: staticLastModified,
     changeFrequency: "monthly" as const,
     priority: 0.6,
