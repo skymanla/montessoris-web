@@ -246,7 +246,11 @@ export function CounselPanel({
             <SendIcon />
           </button>
         </div>
-        <p className="mt-1 px-1 text-center text-[10px] text-stone-400">Enter 전송 · Shift+Enter 줄바꿈</p>
+        <p className="mt-1 px-1 text-center text-[9px] leading-normal text-stone-400">
+          Enter 전송 · Shift+Enter 줄바꿈
+          <br />
+          🔒 학부모님과 아이의 소중한 대화를 안전하게 지키기 위해, 대화 내용이 외부로 유출되지 않고 스스로 답변을 준비하는 안심 AI예요. 대화가 몰려 답변이 조금 늦어지더라도 너른 마음으로 양해해 주시면 감사하겠습니다. 😊
+        </p>
       </div>
     </div>
   )

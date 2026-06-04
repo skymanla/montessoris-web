@@ -4,9 +4,9 @@ import { getLatestPostsData } from "@/lib/posts"
 import JsonLd from "@/components/JsonLd"
 import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data"
 
-const title = "몬테소리스 | AMS 몬테소리 유아교육과 부모 코칭"
+const title = "몬테소리스 | 24H 무료 AI 육아 상담 & 몬테소리 가이드"
 const description =
-  "0-6세 아이의 자율성, 집중력, 생활 독립성을 키우는 몬테소리 교육 정보와 가정 실천 가이드를 제공합니다."
+  "0-6세 아이의 자율성, 집중력, 독립성을 키우는 몬테소리 교육 정보와 가이드. 24시간 언제든 물어볼 수 있는 안심 AI 육아 상담 비서를 만나보세요."
 
 export const metadata: Metadata = {
   title,
