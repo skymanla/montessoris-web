@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Definitions for gradients and shadows -->
+  <defs>
+    <!-- Soft shadow for the block -->
+    <filter id="soft-shadow" x="-10%" y="-10%" width="120%" height="125%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#4A3525" flood-opacity="0.12" />
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#4A3525" flood-opacity="0.08" />
+    </filter>
+    
+    <!-- Wooden texture/gradient -->
+    <linearGradient id="wood-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F3E1C3" />
+      <stop offset="100%" stop-color="#E5C799" />
+    </linearGradient>
+    
+    <!-- Inner panel gradient for 3D look -->
+    <linearGradient id="inner-wood-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FAF1E3" />
+      <stop offset="100%" stop-color="#EDD5B3" />
+    </linearGradient>
+    
+    <!-- Leaf gradient -->
+    <linearGradient id="leaf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9ADF7F" />
+      <stop offset="100%" stop-color="#64B947" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sprout Stem (Behind the block slightly or on top) -->
+  <path d="M 256,180 Q 256,110 216,80" fill="none" stroke="#64B947" stroke-width="14" stroke-linecap="round" />
+  <path d="M 256,150 Q 266,110 296,90" fill="none" stroke="#64B947" stroke-width="12" stroke-linecap="round" />
+  
+  <!-- Leaves -->
+  <!-- Left leaf -->
+  <path d="M 216,80 C 170,75 160,115 200,125 C 220,130 225,105 216,80 Z" fill="url(#leaf-grad)" />
+  <!-- Right leaf -->
+  <path d="M 296,90 C 335,80 340,115 310,130 C 295,138 290,115 296,90 Z" fill="url(#leaf-grad)" />
+  
+  <!-- Soil/base hole on top of the block -->
+  <ellipse cx="256" cy="176" rx="36" ry="12" fill="#8B5A2B" opacity="0.8" />
+
+  <!-- Main Wood Block -->
+  <rect x="96" y="170" width="320" height="300" rx="48" fill="url(#wood-grad)" filter="url(#soft-shadow)" />
+  
+  <!-- Outer border accent on the block -->
+  <rect x="96" y="170" width="320" height="300" rx="48" fill="none" stroke="#D1AC74" stroke-width="6" />
+
+  <!-- Inner panel of the wooden block -->
+  <rect x="126" y="200" width="260" height="240" rx="32" fill="url(#inner-wood-grad)" stroke="#E5C799" stroke-width="4" />
+
+  <!-- Letter 'M' (Stylized, friendly and rounded) -->
+  <path d="M 176,380 L 176,260 Q 176,245 191,255 L 256,310 L 321,255 Q 336,245 336,260 L 336,380" 
+        fill="none" stroke="#4A3525" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
