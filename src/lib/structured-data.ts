@@ -8,7 +8,7 @@ export const organizationJsonLd = {
   name: siteConfig.name,
   alternateName: siteConfig.alternateName,
   url: siteConfig.url,
-  logo: absoluteUrl("/icon.png"),
+  logo: absoluteUrl("/icon.svg"),
   image: absoluteUrl(siteConfig.ogImage),
   description: siteConfig.description,
   inLanguage: siteConfig.language,
