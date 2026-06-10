@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: "몬테소리스",
-  alternateName: "Montessori",
+  name: "몬테소리",
+  alternateName: "montessoris.net",
   url: "https://montessoris.net",
   description:
     "0-6세 아이의 자율성, 집중력, 독립성을 돕는 몬테소리 교육 정보와 가이드. 24시간 언제든 물어볼 수 있는 안심 AI 육아 상담 비서를 만나보세요.",

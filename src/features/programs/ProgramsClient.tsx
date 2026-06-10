@@ -1,10 +1,8 @@
-"use client"
+import { getDefaultDictionary } from "@/lib/dictionaries"
 
-import { useLocale } from "@/components/LocaleContext"
+const dict = getDefaultDictionary()
 
 export default function ProgramsClient() {
-  const { dict } = useLocale()
-  
   return (
     <div className="min-h-screen pt-16 font-[family-name:var(--font-geist-sans)] pb-24">
       {/* Title Header */}

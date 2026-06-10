@@ -11,7 +11,7 @@ const dictionaries = {
       cta: "자세히 알아보기",
     },
     philosophy: {
-      badge: "Montessori Education",
+      badge: "몬테소리 교육",
       title: '"나 혼자 할 수 있도록 도와주세요"',
       p1: "몬테소리 교육은 단순히 지식을 주입하는 학습법이 아닙니다. 이탈리아의 의사이자 교육가였던 마리아 몬테소리 박사가 창안한 이 교육법은, 아이들이 태어날 때부터 스스로 배우고자 하는 본능적인 욕구와 무한한 잠재력을 가지고 있다는 깊은 믿음에서 출발합니다. 우리는 아이를 미성숙한 존재로 보지 않고, 스스로 성장할 수 있는 능력을 갖춘 존엄한 인격체로 바라봅니다.",
       p2: "우리의 역할은 아이를 가르치거나 주도하는 것이 아니라, 아이의 발달 단계에 완벽하게 맞춰진 '준비된 환경(Prepared Environment)'을 제공하는 것입니다. 그 안에서 아이는 스스로 교구를 선택하고 몰입하며, 내면의 질서를 잡고 자신만의 속도로 성장해 나갑니다. 이것이 바로 100년 넘게 전 세계적으로 검증된 몬테소리 교육의 본질입니다.",
@@ -20,7 +20,7 @@ const dictionaries = {
       feature3: "내면의 질서감과 깊은 집중력을 자연스럽게 이끌어내는 환경",
     },
     why: {
-      title: "왜 Montessori인가요?",
+      title: "왜 몬테소리인가요?",
       subtitle: "단순한 놀이가 아닙니다. 아이의 결정적 시기에 맞춘 체계적인 환경과 과학적인 교구로 일생을 살아가는 데 필요한 자율성, 집중력, 그리고 긍정적인 자존감을 키워줍니다.",
       feature1_title: "AMS 기준 정통 교육",
       feature1_desc: "미국 몬테소리 협회(AMS)의 엄격한 기준을 철저히 준수한 교육 환경을 제공합니다. 검증된 커리큘럼과 자격증을 보유한 전문 교사가 아이의 성장을 체계적으로 지원합니다.",
@@ -107,19 +107,19 @@ const dictionaries = {
         {
           id: "concentration",
           title: "몰입과 집중력 (Concentration)",
-          desc: "방해받지 않는 깊은 몰입의 경험은 아이의 두뇌를 발달시키는 최고의 자양분입니다.",
+          desc: "방해받지 않는 깊은 몰입 경험은 아이의 두뇌 발달, 정서 안정, 자기 조절력을 함께 키우는 중요한 토대입니다.",
           content: "아이들은 흥미로운 작업에 몰두할 때 놀라운 집중력을 발휘합니다. 몬테소리 교구는 아이의 호기심을 자극하고 도전을 불러일으키도록 과학적으로 설계되었습니다. 아이가 활동에 깊이 빠져있는 '몰입의 순간'을 존중하고 보호해줌으로써, 아이는 긴 시간 동안 주의를 기울이는 힘을 기르고, 내면의 평화와 정서적 안정을 얻게 됩니다."
         },
         {
           id: "social-emotional",
           title: "사회성과 배려 (Social Development)",
-          desc: "경쟁이 아닌 협력을 배우며, 타인을 존중하는 따뜻한 사회성을 기릅니다.",
+          desc: "경쟁보다 협력을 경험하며 기다림, 배려, 갈등 해결을 생활 속에서 익히고 타인을 존중하는 사회성을 기릅니다.",
           content: "몬테소리 교실은 작은 사회입니다. 다양한 연령대가 어우러진 혼합 연령 학급(Mixed Age Group)에서 동생은 형을 보며 배우고, 형은 동생을 도와주며 자연스럽게 리더십과 배려심을 익힙니다. 하나의 교구를 사용하기 위해 기다리는 법, 친구의 작업을 방해하지 않는 법, 갈등을 평화롭게 해결하는 법을 생활 속에서 체득하며 성숙한 시민 의식을 갖추게 됩니다."
         },
         {
           id: "creativity",
           title: "창의적 문제 해결력 (Problem Solving)",
-          desc: "정해진 답을 외우는 것이 아니라, 스스로 원리를 깨우치고 해결책을 찾아냅니다.",
+          desc: "정해진 답을 외우기보다 스스로 원리를 확인하고 실수를 수정하며 창의적인 해결책을 찾아가는 힘을 기릅니다.",
           content: "대부분의 몬테소리 교구는 '오류의 정정(Control of Error)' 기능을 내장하고 있습니다. 아이는 활동 중에 자신이 실수했다는 것을 스스로 인지하고, 선생님의 지적 없이도 스스로 수정하는 과정을 거치게 됩니다. 실패를 두려워하지 않고 다양한 시도를 통해 답을 찾아가는 과정에서 아이는 비판적 사고력과 창의적인 문제 해결 능력을 자연스럽게 습득합니다."
         }
       ]
@@ -142,4 +142,8 @@ const dictionaries = {
 }
 
 export type Locale = keyof typeof dictionaries
-export const getDictionary = (locale: Locale) => dictionaries[locale] || dictionaries.ko
+
+export const DEFAULT_LOCALE: Locale = "ko"
+
+export const getDictionary = (locale: Locale = DEFAULT_LOCALE) => dictionaries[locale] || dictionaries.ko
+export const getDefaultDictionary = () => getDictionary(DEFAULT_LOCALE)

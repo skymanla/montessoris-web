@@ -3,10 +3,11 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styles from './CounselWidget.module.css'
 import { useChatSession } from './useChatSession'
+import { isCounselPath } from '@/lib/routes'
 import { usePathname, useRouter } from 'next/navigation'
 
 /**
- * 몬테소리스 상담 위젯.
+ * 몬테소리 상담 위젯.
  * - 모든 페이지 우하단에 떠 있는 런처 → 탭하면 상담 패널이 열린다.
  * - 모바일: /counsel 페이지로 이동 / sm 이상: 우하단 카드 팝업.
  * - 페르소나 '마리' — 아이를 차분히 관찰하도록 돕는 몬테소리 길잡이.
@@ -30,7 +31,7 @@ export default function CounselWidget() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  if (pathname === '/counsel') {
+  if (isCounselPath(pathname)) {
     return null
   }
 
@@ -55,7 +56,7 @@ function Launcher({ onOpen }: { onOpen: () => void }) {
     <button
       type="button"
       onClick={onOpen}
-      aria-label="몬테소리스 상담 열기"
+      aria-label="몬테소리 상담 열기"
       className={`${styles.pulse} fixed right-5 z-[80] flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95`}
       style={{ bottom: 'max(env(safe-area-inset-bottom), 1.25rem)', backgroundColor: SAGE }}
     >
@@ -143,7 +144,7 @@ export function CounselPanel({
     <div
       role={isPage ? undefined : 'dialog'}
       aria-modal={isPage ? undefined : 'true'}
-      aria-label="몬테소리스 상담"
+      aria-label="몬테소리 상담"
       className={containerClasses}
     >
       {/* 헤더 */}
@@ -160,7 +161,13 @@ export function CounselPanel({
         )}
         <CounselorAvatar />
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-bold text-stone-800">마리 · 몬테소리 상담</p>
+          {isPage ? (
+            <h1 className="truncate text-sm font-bold text-stone-800">
+              24시간 무료 AI 몬테소리 육아 상담
+            </h1>
+          ) : (
+            <p className="truncate text-sm font-bold text-stone-800">마리 · 몬테소리 상담</p>
+          )}
           <p className="truncate text-[11px] text-stone-500">
             {status === 'thinking'
               ? '마리 선생님이 마음을 살피는 중…'

@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Metadata } from "next"
 import JsonLd from "@/components/JsonLd"
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/structured-data"
+import { createPageMetadata } from "@/lib/metadata"
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -12,21 +13,15 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const postData = await getPostData(slug)
-  return {
+  return createPageMetadata({
     title: postData.title,
     description: postData.description,
-    alternates: {
-      canonical: `/blog/${slug}/`,
-    },
+    path: `/blog/${slug}/`,
     openGraph: {
-      title: postData.title,
-      description: postData.description,
       type: "article",
-      url: `/blog/${slug}/`,
       publishedTime: postData.date,
-      images: ["/images/edu-rooms/TalkMedia_i_88239f1cd4c2.jpeg.jpeg"],
     },
-  }
+  })
 }
 
 export async function generateStaticParams() {

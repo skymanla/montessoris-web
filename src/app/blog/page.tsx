@@ -1,31 +1,30 @@
 import Link from "next/link"
 import { getSortedPostsData } from "@/lib/posts"
-import { Metadata } from "next"
+import { createPageMetadata } from "@/lib/metadata"
+import JsonLd from "@/components/JsonLd"
+import { breadcrumbJsonLd, webPageJsonLd } from "@/lib/structured-data"
 
 const title = "몬테소리 교육 블로그"
 const description =
   "몬테소리 철학, 교구 선택, 집에서 실천하는 준비된 환경, 유치원 비교까지 부모를 위한 교육 글을 모았습니다."
 
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: {
-    canonical: "/blog/",
-  },
-  openGraph: {
-    title,
-    description,
-    url: "/blog",
-    images: ["/images/edu-rooms/TalkMedia_i_88239f1cd4c2.jpeg.jpeg"],
-  },
-}
+export const metadata = createPageMetadata({ title, description, path: "/blog/" })
 
 export default function BlogPage() {
   const allPostsData = getSortedPostsData()
+  const structuredData = [
+    webPageJsonLd({ name: title, description, path: "/blog/" }),
+    breadcrumbJsonLd([
+      { name: "홈", path: "/" },
+      { name: "블로그", path: "/blog/" },
+    ]),
+  ]
 
   return (
-    <div className="min-h-screen pt-32 pb-20 bg-stone-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <>
+      <JsonLd data={structuredData} />
+      <div className="min-h-screen pt-32 pb-20 bg-stone-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-3xl font-bold text-stone-900 mb-4">블로그</h1>
           <p className="text-stone-600 max-w-2xl mx-auto">
@@ -58,7 +57,8 @@ export default function BlogPage() {
             </Link>
           ))}
         </div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }

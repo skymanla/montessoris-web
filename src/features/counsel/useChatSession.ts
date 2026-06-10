@@ -3,10 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   fetchSessionHistory,
-  loadStoredSessionId,
-  persistSessionId,
   sendChatMessage,
-} from './chatClient';
+} from './chatApi';
+import { loadStoredSessionId, persistSessionId } from './chatStorage';
 
 export type ChatStatus = 'idle' | 'thinking' | 'error' | 'restoring';
 
@@ -22,7 +21,7 @@ const WELCOME: ChatMessage = {
   id: 'welcome',
   role: 'assistant',
   content:
-    '안녕하세요 :) 몬테소리스 상담이에요. 요즘 아이를 지켜보며 어떤 점이 궁금하셨어요?',
+    '안녕하세요 :) 몬테소리 상담이에요. 요즘 아이를 지켜보며 어떤 점이 궁금하셨어요?',
 };
 
 export function useChatSession() {

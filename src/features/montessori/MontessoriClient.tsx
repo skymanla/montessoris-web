@@ -1,11 +1,9 @@
-"use client"
-
 import Image from "next/image"
-import { useLocale } from "@/components/LocaleContext"
+import { getDefaultDictionary } from "@/lib/dictionaries"
+
+const dict = getDefaultDictionary()
 
 export default function MontessoriClient() {
-  const { dict } = useLocale()
-  
   return (
     <div className="min-h-screen pt-16 font-[family-name:var(--font-geist-sans)] pb-24">
       {/* Title Header */}

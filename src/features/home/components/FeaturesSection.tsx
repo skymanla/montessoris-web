@@ -1,11 +1,9 @@
-"use client"
-
-import { useLocale } from "@/components/LocaleContext"
+import { getDefaultDictionary } from "@/lib/dictionaries"
 import { Section, Container } from "@/components/layout/Layout"
 
-export function FeaturesSection() {
-  const { dict } = useLocale()
+const dict = getDefaultDictionary()
 
+export function FeaturesSection() {
   const features = [
     {
       title: dict.why.feature1_title,

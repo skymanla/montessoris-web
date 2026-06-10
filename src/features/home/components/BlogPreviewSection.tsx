@@ -1,13 +1,11 @@
-"use client"
-
 import Link from "next/link"
-import { useLocale } from "@/components/LocaleContext"
+import { getDefaultDictionary } from "@/lib/dictionaries"
 import { Section, Container } from "@/components/layout/Layout"
 import { PostData } from "@/lib/posts"
 
-export function BlogPreviewSection({ latestPosts }: { latestPosts: PostData[] }) {
-  const { dict } = useLocale()
+const dict = getDefaultDictionary()
 
+export function BlogPreviewSection({ latestPosts }: { latestPosts: PostData[] }) {
   return (
     <Section background="stone">
       <Container>

@@ -1,7 +1,8 @@
-"use client"
-
 import Link from "next/link"
-import { useLocale } from "@/components/LocaleContext"
+import { DEFAULT_LOCALE, getDefaultDictionary } from "@/lib/dictionaries"
+
+const dict = getDefaultDictionary()
+const locale = DEFAULT_LOCALE
 
 interface BenefitItem {
   id: string
@@ -11,8 +12,6 @@ interface BenefitItem {
 }
 
 export default function BenefitsClient() {
-  const { dict, locale } = useLocale()
-
   return (
     <div className="min-h-screen pt-16 font-[family-name:var(--font-geist-sans)]">
       {/* Hero Section */}
