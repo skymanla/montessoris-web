@@ -1,12 +1,10 @@
-"use client"
-
 import ImageSlider from "@/components/ImageSlider"
-import { useLocale } from "@/components/LocaleContext"
+import { getDefaultDictionary } from "@/lib/dictionaries"
 import { Section, Container } from "@/components/layout/Layout"
 
-export function PhilosophySection() {
-  const { dict } = useLocale()
+const dict = getDefaultDictionary()
 
+export function PhilosophySection() {
   return (
     <Section background="stone" className="py-20 lg:py-32">
       <Container>

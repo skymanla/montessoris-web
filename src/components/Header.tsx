@@ -2,15 +2,17 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { useLocale } from "@/components/LocaleContext"
+import { getDefaultDictionary } from "@/lib/dictionaries"
+import { isCounselPath } from "@/lib/routes"
 import { usePathname } from "next/navigation"
+
+const dict = getDefaultDictionary()
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
-  const { dict } = useLocale()
   const pathname = usePathname()
 
-  if (pathname === "/counsel") {
+  if (isCounselPath(pathname)) {
     return null
   }
 
@@ -31,7 +33,7 @@ export default function Header() {
         <div className="flex justify-between h-16 items-center">
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="text-2xl font-bold text-stone-800 tracking-tight">
-              Montessori
+              몬테소리
             </Link>
           </div>
 
@@ -51,11 +53,14 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
             <button
+              type="button"
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-stone-600 hover:text-stone-900 hover:bg-stone-100 focus:outline-none transition-colors"
-              aria-expanded="false"
+              aria-controls="mobile-navigation"
+              aria-expanded={isOpen}
+              aria-label={isOpen ? "메뉴 닫기" : "메뉴 열기"}
             >
-              <span className="sr-only">메뉴 열기</span>
+              <span className="sr-only">{isOpen ? "메뉴 닫기" : "메뉴 열기"}</span>
               {isOpen ? (
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -72,7 +77,7 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden bg-white border-b border-stone-100">
+        <div id="mobile-navigation" className="md:hidden bg-white border-b border-stone-100">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {menuItems.map((item) => (
               <Link

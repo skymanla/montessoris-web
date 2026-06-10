@@ -1,5 +1,3 @@
-"use client"
-
 import { PostData } from "@/lib/posts"
 import { HeroSection } from "./components/HeroSection"
 import { PhilosophySection } from "./components/PhilosophySection"
