@@ -92,7 +92,6 @@ const dictionaries = {
     footer: {
       privacy: "개인정보처리방침",
       terms: "이용약관",
-      contact: "문의하기",
     },
     benefits: {
       title: "몬테소리 교육의 장점",
@@ -123,14 +122,6 @@ const dictionaries = {
           content: "대부분의 몬테소리 교구는 '오류의 정정(Control of Error)' 기능을 내장하고 있습니다. 아이는 활동 중에 자신이 실수했다는 것을 스스로 인지하고, 선생님의 지적 없이도 스스로 수정하는 과정을 거치게 됩니다. 실패를 두려워하지 않고 다양한 시도를 통해 답을 찾아가는 과정에서 아이는 비판적 사고력과 창의적인 문제 해결 능력을 자연스럽게 습득합니다."
         }
       ]
-    },
-    contact: {
-      title: "문의하기",
-      subtitle: "궁금하신 점이 있으시면 언제든 문의해 주세요.",
-      name: "이름",
-      email: "이메일",
-      message: "문의 내용",
-      send: "메시지 보내기",
     },
     privacy: {
       title: "개인정보처리방침",
