@@ -1,3 +1,4 @@
+import Link from "next/link"
 import ImageSlider from "@/components/ImageSlider"
 import { getDefaultDictionary } from "@/lib/dictionaries"
 import { Section, Container } from "@/components/layout/Layout"
@@ -38,6 +39,15 @@ export function PhilosophySection() {
                   <span>{dict.philosophy.feature3}</span>
                 </li>
               </ul>
+              <div className="pt-6">
+                <Link 
+                  href="/montessori"
+                  className="inline-flex items-center gap-2 text-[#4e7a66] font-semibold hover:text-[#3c6150] transition-colors group"
+                >
+                  몬테소리 철학 더 보기
+                  <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

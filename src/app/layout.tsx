@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 import Header from "@/components/Header"
@@ -116,7 +117,9 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
-        <CounselWidget />
+        <Suspense fallback={null}>
+          <CounselWidget />
+        </Suspense>
       </body>
     </html>
   )

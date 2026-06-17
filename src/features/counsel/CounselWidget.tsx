@@ -4,7 +4,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styles from './CounselWidget.module.css'
 import { useChatSession } from './useChatSession'
 import { isCounselPath } from '@/lib/routes'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 /**
  * 몬테소리 상담 위젯.
@@ -20,6 +20,7 @@ export default function CounselWidget() {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -30,6 +31,18 @@ export default function CounselWidget() {
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
+
+  useEffect(() => {
+    if (searchParams.get('counsel') === 'open') {
+      setOpen(true)
+      // URL에서 쿼리 파라미터 정리
+      const params = new URLSearchParams(searchParams.toString())
+      params.delete('counsel')
+      const query = params.toString()
+      const cleanPath = query ? `${pathname}?${query}` : pathname
+      router.replace(cleanPath)
+    }
+  }, [searchParams, pathname, router])
 
   if (isCounselPath(pathname)) {
     return null
