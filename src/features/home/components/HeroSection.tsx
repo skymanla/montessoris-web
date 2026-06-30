@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { getDefaultDictionary } from "@/lib/dictionaries"
+import { RodStaircase } from "@/components/Measure"
 
 const dict = getDefaultDictionary()
 
@@ -28,31 +29,75 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-4xl sm:text-6xl font-bold text-stone-900 tracking-tight mb-6 leading-tight">
-            {dict.hero.title} <br/>
-            <span className="text-stone-500">몬테소리</span>
+    <section className="relative overflow-hidden bg-pine text-paper">
+      {/* faint Pink-Tower echo, atmosphere only */}
+      <svg
+        aria-hidden
+        viewBox="0 0 200 200"
+        className="pointer-events-none absolute -right-10 -top-6 h-[420px] w-[420px] text-paper/[0.04]"
+      >
+        <g fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="40" y="120" width="120" height="60" />
+          <rect x="55" y="78" width="90" height="42" />
+          <rect x="70" y="46" width="60" height="32" />
+          <rect x="85" y="24" width="30" height="22" />
+        </g>
+      </svg>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-16 lg:pt-28 lg:pb-20">
+        <div className="max-w-3xl">
+          <p className="animate-fade font-mono text-[11px] sm:text-xs uppercase tracking-[0.25em] text-moss-light">
+            몬테소리 · AMS 정통 교육 · 0–6세
+          </p>
+
+          <h1 className="animate-rise mt-7 font-display font-medium leading-[1.16] tracking-tight text-4xl sm:text-5xl lg:text-[3.9rem]">
+            <span className="text-moss-light/80">「</span>나 혼자 할 수 있도록
+            <br />
+            도와주세요<span className="text-moss-light/80">」</span>
           </h1>
-          <p className="mt-4 text-xl text-stone-600 mb-10 whitespace-pre-line leading-relaxed">
+
+          <p
+            className="animate-rise mt-4 font-display text-base sm:text-lg text-moss-light"
+            style={{ animationDelay: "0.08s" }}
+          >
+            — 마리아 몬테소리
+          </p>
+
+          <p
+            className="animate-rise mt-8 max-w-xl whitespace-pre-line text-base sm:text-lg leading-relaxed text-paper/85"
+            style={{ animationDelay: "0.16s" }}
+          >
             {dict.hero.subtitle}
           </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <Link 
+
+          <div
+            className="animate-rise mt-10 flex flex-col sm:flex-row gap-3"
+            style={{ animationDelay: "0.24s" }}
+          >
+            <Link
               href="/montessori"
-              className="w-full sm:w-auto px-8 py-4 bg-stone-900 text-white text-center rounded-full font-semibold text-lg hover:bg-stone-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              className="inline-flex items-center justify-center rounded-md bg-paper px-7 py-4 text-base font-semibold text-pine transition-colors hover:bg-white"
             >
               {dict.hero.cta}
             </Link>
-            <Link 
+            <Link
               href="/counsel"
               onClick={handleCounselClick}
-              className="w-full sm:w-auto px-8 py-4 border border-[#5f8d76]/30 bg-white text-[#4e7a66] hover:bg-[#5f8d76]/5 hover:border-[#5f8d76]/50 text-center rounded-full font-semibold text-lg transition-all shadow-sm hover:shadow-md transform hover:-translate-y-1"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-moss/40 px-7 py-4 text-base font-semibold text-paper transition-colors hover:border-moss hover:bg-white/[0.06]"
             >
               AI 육아 상담 받기
+              <span aria-hidden>→</span>
             </Link>
           </div>
+        </div>
+
+        {/* Signature: the child grows in measured, self-directed steps */}
+        <div className="mt-14 lg:mt-16">
+          <RodStaircase />
+          <div className="measure-rule mt-2 max-w-md text-moss-light/70" aria-hidden />
+          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-moss-light/70">
+            Nido · Infant Community · Casa — 한 걸음씩, 자기 속도로
+          </p>
         </div>
       </div>
     </section>

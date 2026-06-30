@@ -28,11 +28,11 @@ export default function Header() {
   ]
 
   return (
-    <header className="fixed w-full bg-white/80 backdrop-blur-md z-50 border-b border-stone-100">
+    <header className="fixed w-full bg-paper/85 backdrop-blur-md z-50 border-b border-ink/[0.08]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="text-2xl font-bold text-stone-800 tracking-tight">
+            <Link href="/" className="font-display text-2xl font-semibold text-ink tracking-tight">
               몬테소리
             </Link>
           </div>
@@ -43,7 +43,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-stone-600 hover:text-stone-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-ink/70 hover:text-ink px-3 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 {item.name}
               </Link>
@@ -55,7 +55,7 @@ export default function Header() {
             <button
               type="button"
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-stone-600 hover:text-stone-900 hover:bg-stone-100 focus:outline-none transition-colors"
+              className="inline-flex items-center justify-center p-2 rounded-md text-ink/70 hover:text-ink hover:bg-ink/5 focus:outline-none transition-colors"
               aria-controls="mobile-navigation"
               aria-expanded={isOpen}
               aria-label={isOpen ? "메뉴 닫기" : "메뉴 열기"}
@@ -77,13 +77,13 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div id="mobile-navigation" className="md:hidden bg-white border-b border-stone-100">
+        <div id="mobile-navigation" className="md:hidden bg-paper border-b border-ink/[0.08]">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {menuItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="block px-3 py-2 rounded-md text-base font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-50 transition-colors"
+                className="block px-3 py-2 rounded-md text-base font-medium text-ink/70 hover:text-ink hover:bg-ink/5 transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}

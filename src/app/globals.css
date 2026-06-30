@@ -4,46 +4,124 @@
 
 @layer base {
   body {
-    @apply bg-stone-50 text-stone-900;
+    @apply bg-paper text-ink font-sans;
     scroll-behavior: smooth;
+  }
+
+  /* Visible keyboard focus everywhere, in brand sage */
+  :where(a, button, input, [tabindex]):focus-visible {
+    outline: 2px solid #4e7a66;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: #c8dbcf;
+    color: #26402f;
   }
 }
 
+@layer components {
+  /*
+   * Signature: "측정(The Measure)" — a worksheet / number-rod tick rule.
+   * A hairline baseline with evenly spaced ticks, like the segments of a
+   * Montessori number rod or the margin of a ruled workbook.
+   */
+  .measure-rule {
+    height: 12px;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        currentColor 0,
+        currentColor 1px,
+        transparent 1px,
+        transparent 18px
+      ),
+      linear-gradient(currentColor, currentColor);
+    background-repeat: repeat-x, no-repeat;
+    background-position: left bottom, left bottom;
+    background-size: 100% 7px, 100% 1px;
+    opacity: 0.35;
+  }
+}
+
+/* ---- Motion: page-load + scroll reveal ---- */
+
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-@keyframes slide-in-from-bottom {
-  from { transform: translateY(1rem); }
-  to { transform: translateY(0); }
+@keyframes rise-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.animate-in {
-  animation-duration: 0.5s;
-  animation-fill-mode: both;
+/* The hero rod-staircase: each rod grows up from the baseline in sequence */
+@keyframes rod-grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
 }
 
-.fade-in {
-  animation-name: fade-in;
+.animate-rise {
+  animation: rise-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.slide-in-from-bottom-4 {
-  animation-name: slide-in-from-bottom;
-  --tw-translate-y: 1rem;
+.animate-fade {
+  animation: fade-in 0.8s ease both;
 }
 
-.slide-in-from-bottom-6 {
-  animation-name: slide-in-from-bottom;
-  --tw-translate-y: 1.5rem;
+.rod {
+  transform-origin: bottom;
+  animation: rod-grow 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.slide-in-from-bottom-8 {
-  animation-name: slide-in-from-bottom;
-  --tw-translate-y: 2rem;
+/*
+ * Scroll-reveal. Fail-safe: elements render visible by default (SEO / no-JS
+ * safe, no hydration mismatch). The Reveal component arms `.is-hidden` only on
+ * the client, only for below-the-fold elements, then removes it on intersect.
+ */
+.reveal {
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.delay-200 { animation-delay: 200ms; }
-.delay-500 { animation-delay: 500ms; }
-.duration-1000 { animation-duration: 1000ms; }
-.fill-mode-both { animation-fill-mode: both; }
+.reveal.is-hidden {
+  opacity: 0;
+  transform: translateY(1.5rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal.is-hidden {
+    opacity: 1;
+    transform: none;
+  }
+
+  .rod {
+    transform: none;
+  }
+}

@@ -3,6 +3,7 @@ import { getSortedPostsData } from "@/lib/posts"
 import { createPageMetadata } from "@/lib/metadata"
 import JsonLd from "@/components/JsonLd"
 import { breadcrumbJsonLd, webPageJsonLd } from "@/lib/structured-data"
+import { PageHeader } from "@/components/PageHeader"
 
 const title = "몬테소리 교육 블로그"
 const description =
@@ -23,40 +24,39 @@ export default function BlogPage() {
   return (
     <>
       <JsonLd data={structuredData} />
-      <div className="min-h-screen pt-32 pb-20 bg-stone-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h1 className="text-3xl font-bold text-stone-900 mb-4">블로그</h1>
-          <p className="text-stone-600 max-w-2xl mx-auto">
-            몬테소리 교육의 철학과 실천 방법, 그리고 아이들과 함께하는 일상의 이야기를 나눕니다.
-          </p>
-        </div>
+      <div className="pt-16">
+        <PageHeader
+          eyebrow="몬테소리 교육 블로그"
+          title="블로그"
+          subtitle="몬테소리 교육의 철학과 실천 방법, 그리고 아이들과 함께하는 일상의 이야기를 나눕니다."
+        />
 
-        <div className="grid gap-8 md:grid-cols-2">
-          {allPostsData.map(({ id, date, title, description }) => (
-            <Link
-              key={id}
-              href={`/blog/${id}`}
-              className="block group bg-white rounded-2xl overflow-hidden border border-stone-100 hover:border-stone-200 hover:shadow-lg transition-all"
-            >
-              <div className="p-8">
-                <time className="text-sm text-stone-500 mb-2 block">{date}</time>
-                <h2 className="text-xl font-bold text-stone-900 mb-3 group-hover:text-stone-600 transition-colors">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+          <div className="grid gap-6 sm:grid-cols-2 lg:gap-8">
+            {allPostsData.map(({ id, date, title, description }) => (
+              <Link
+                key={id}
+                href={`/blog/${id}`}
+                className="group flex h-full flex-col rounded-xl border border-ink/10 bg-white p-8 transition duration-300 hover:-translate-y-1 hover:border-sage/50 hover:shadow-[0_18px_44px_-26px_rgba(38,64,47,0.4)]"
+              >
+                <time className="font-mono text-xs uppercase tracking-wider text-ink/45">
+                  {date}
+                </time>
+                <h2 className="mt-4 font-display text-xl font-semibold leading-snug text-ink transition-colors group-hover:text-sage-deep">
                   {title}
                 </h2>
-                <p className="text-stone-600 leading-relaxed line-clamp-3">
+                <p className="mt-3 line-clamp-3 flex-grow leading-relaxed text-ink/65">
                   {description}
                 </p>
-                <div className="mt-6 flex items-center text-stone-800 font-medium group-hover:underline">
+                <div className="mt-6 flex items-center gap-1.5 text-sm font-semibold text-sage-deep">
                   자세히 보기
-                  <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+                  <span aria-hidden className="transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </>

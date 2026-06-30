@@ -1,6 +1,7 @@
 import { Suspense } from "react"
 import type { Metadata } from "next"
 import localFont from "next/font/local"
+import { Hahmlet, IBM_Plex_Sans_KR } from "next/font/google"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import GoogleAdsense from "@/components/GoogleAdsense"
@@ -9,9 +10,26 @@ import CounselWidget from "@/features/counsel/CounselWidget"
 import { GoogleTagManager } from "@next/third-parties/google"
 import { absoluteUrl, siteConfig } from "@/lib/site"
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
+// Display: a high-contrast contemporary Korean serif — dignified, editorial.
+const displaySerif = Hahmlet({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+})
+
+// Body / UI: more character than Noto, highly legible at small sizes.
+const bodySans = IBM_Plex_Sans_KR({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+  display: "swap",
+})
+
+// Utility: measurements, eyebrows, age labels — the "precise materials" voice.
+const geistMono = localFont({
+  src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-mono",
   weight: "100 900",
 })
 
@@ -93,7 +111,7 @@ export default function RootLayout({
     <html lang="ko">
       {isProduction && <GoogleTagManager gtmId="GTM-PZRT52KL" />}
       <body
-        className={`${geistSans.variable} antialiased bg-stone-50 text-stone-900`}
+        className={`${displaySerif.variable} ${bodySans.variable} ${geistMono.variable} antialiased bg-paper text-ink`}
       >
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link
