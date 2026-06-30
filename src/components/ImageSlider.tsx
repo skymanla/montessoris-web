@@ -37,7 +37,7 @@ export default function ImageSlider() {
   }
 
   return (
-    <div className="relative w-full h-full group overflow-hidden rounded-2xl shadow-xl">
+    <div className="relative w-full h-full group overflow-hidden rounded-lg shadow-[0_24px_60px_-30px_rgba(38,64,47,0.5)]">
       {images.map((image, index) => (
         <div
           key={image.src}

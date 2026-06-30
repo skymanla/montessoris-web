@@ -1,8 +1,14 @@
 import Link from "next/link"
-import { DEFAULT_LOCALE, getDefaultDictionary } from "@/lib/dictionaries"
+import { getDefaultDictionary } from "@/lib/dictionaries"
+import { PageHeader } from "@/components/PageHeader"
+import {
+  GlyphSprout,
+  GlyphCylinder,
+  GlyphPair,
+  GlyphTriangle,
+} from "@/components/MaterialGlyph"
 
 const dict = getDefaultDictionary()
-const locale = DEFAULT_LOCALE
 
 interface BenefitItem {
   id: string
@@ -11,48 +17,66 @@ interface BenefitItem {
   content: string
 }
 
+const glyphs: Record<string, (p: { className?: string }) => React.ReactElement> = {
+  independence: GlyphSprout,
+  concentration: GlyphCylinder,
+  "social-emotional": GlyphPair,
+  creativity: GlyphTriangle,
+}
+
 export default function BenefitsClient() {
   return (
-    <div className="min-h-screen pt-16 font-[family-name:var(--font-geist-sans)]">
-      {/* Hero Section */}
-      <section className="bg-stone-100 py-20 px-4 sm:px-6 lg:px-8 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl font-bold text-stone-900 mb-6">
-            {dict.benefits.title}
-          </h1>
-          <p className="text-xl text-stone-600 leading-relaxed">
-            {dict.benefits.subtitle}
-          </p>
-        </div>
-      </section>
+    <div className="pt-16">
+      <PageHeader title={dict.benefits.title} subtitle={dict.benefits.subtitle} />
 
-      {/* Benefits Grid */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-8">
-          {dict.benefits.items.map((item: BenefitItem) => (
-            <Link 
-              key={item.id} 
-              href={`/benefits/${item.id}`}
-              className="group bg-white p-8 rounded-3xl border border-stone-100 shadow-sm hover:shadow-xl transition-all transform hover:-translate-y-1"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-12 h-12 bg-stone-100 rounded-2xl flex items-center justify-center text-2xl group-hover:bg-stone-900 group-hover:text-white transition-colors">
-                  {item.id === 'independence' && '🌱'}
-                  {item.id === 'concentration' && '🧩'}
-                  {item.id === 'social-emotional' && '🤝'}
-                  {item.id === 'creativity' && '🎨'}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
+          {dict.benefits.items.map((item: BenefitItem) => {
+            const Glyph = glyphs[item.id] ?? GlyphSprout
+            return (
+              <Link
+                key={item.id}
+                href={`/benefits/${item.id}`}
+                className="group flex flex-col rounded-xl border border-ink/10 bg-white p-8 transition duration-300 hover:-translate-y-1 hover:border-sage/50 hover:shadow-[0_18px_44px_-26px_rgba(38,64,47,0.4)]"
+              >
+                <div className="flex items-start justify-between">
+                  <Glyph className="text-sage" />
+                  <span
+                    aria-hidden
+                    className="text-ink/30 transition-colors group-hover:text-sage-deep"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="7" y1="17" x2="17" y2="7" />
+                      <polyline points="7 7 17 7 17 17" />
+                    </svg>
+                  </span>
                 </div>
-                <span className="text-stone-400 group-hover:text-stone-900 transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                <h2 className="mt-6 font-display text-2xl font-semibold text-ink">
+                  {item.title}
+                </h2>
+                <p className="mt-3 leading-relaxed text-ink/70">{item.desc}</p>
+                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-sage-deep">
+                  자세히 보기
+                  <span
+                    aria-hidden
+                    className="transition-transform group-hover:translate-x-0.5"
+                  >
+                    →
+                  </span>
                 </span>
-              </div>
-              <h2 className="text-2xl font-bold text-stone-900 mb-3 group-hover:text-stone-800">{item.title}</h2>
-              <p className="text-stone-600 mb-6 leading-relaxed">{item.desc}</p>
-              <span className="text-sm font-semibold text-stone-900 border-b-2 border-stone-200 group-hover:border-stone-900 transition-all">
-                {locale === 'ko' ? '자세히 보기' : 'Read More'}
-              </span>
-            </Link>
-          ))}
+              </Link>
+            )
+          })}
         </div>
       </section>
     </div>

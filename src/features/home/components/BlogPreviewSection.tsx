@@ -1,52 +1,78 @@
 import Link from "next/link"
 import { getDefaultDictionary } from "@/lib/dictionaries"
-import { Section, Container } from "@/components/layout/Layout"
+import { Container } from "@/components/layout/Layout"
+import { Reveal } from "@/components/Reveal"
 import { PostData } from "@/lib/posts"
 
 const dict = getDefaultDictionary()
 
 export function BlogPreviewSection({ latestPosts }: { latestPosts: PostData[] }) {
   return (
-    <Section background="stone">
+    <section className="bg-linen py-20 lg:py-28">
       <Container>
-        <div className="flex justify-between items-end mb-12">
+        <Reveal className="mb-12 flex items-end justify-between gap-6">
           <div>
-            <h2 className="text-3xl font-bold text-stone-900 mb-4">{dict.blog.title}</h2>
-            <p className="text-stone-600">{dict.blog.subtitle}</p>
+            <h2 className="font-display text-3xl sm:text-4xl font-medium tracking-tight text-ink">
+              {dict.blog.title}
+            </h2>
+            <p className="mt-3 text-ink/65">{dict.blog.subtitle}</p>
           </div>
-          <Link 
-            href="/blog" 
-            className="text-stone-900 font-semibold hover:text-stone-600 transition-colors flex items-center gap-2"
+          <Link
+            href="/blog"
+            className="group hidden shrink-0 items-center gap-2 font-semibold text-sage-deep transition-colors hover:text-pine sm:inline-flex"
           >
             {dict.blog.viewAll}
-            <span className="text-xl">→</span>
-          </Link>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {latestPosts.map((post) => (
-            <Link 
-              href={`/blog/${post.id}`} 
-              key={post.id}
-              className="group bg-white rounded-2xl overflow-hidden border border-stone-100 hover:border-stone-200 transition-all hover:shadow-xl flex flex-col"
+            <span
+              aria-hidden
+              className="text-lg transition-transform group-hover:translate-x-1"
             >
-              <div className="p-8 flex flex-col h-full">
-                <div className="text-sm text-stone-500 mb-3">{post.date}</div>
-                <h3 className="text-xl font-bold text-stone-900 mb-4 group-hover:text-stone-600 transition-colors line-clamp-2">
+              →
+            </span>
+          </Link>
+        </Reveal>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          {latestPosts.map((post, idx) => (
+            <Reveal key={post.id} as="article" delay={idx * 110} className="h-full">
+              <Link
+                href={`/blog/${post.id}`}
+                className="group flex h-full flex-col rounded-xl border border-ink/10 bg-white p-8 transition duration-300 hover:-translate-y-1 hover:border-sage/50 hover:shadow-[0_18px_44px_-26px_rgba(38,64,47,0.4)]"
+              >
+                <div className="font-mono text-xs uppercase tracking-wider text-ink/45">
+                  {post.date}
+                </div>
+                <h3 className="mt-4 line-clamp-2 font-display text-xl font-semibold leading-snug text-ink transition-colors group-hover:text-sage-deep">
                   {post.title}
                 </h3>
-                <p className="text-stone-600 line-clamp-3 text-sm leading-relaxed mb-6 flex-grow">
+                <p className="mt-3 line-clamp-3 flex-grow text-sm leading-relaxed text-ink/65">
                   {post.description}
                 </p>
-                <div className="mt-auto text-stone-900 font-medium flex items-center gap-1">
+                <div className="mt-6 flex items-center gap-1.5 text-sm font-semibold text-sage-deep">
                   {dict.blog.readMore}
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <span
+                    aria-hidden
+                    className="transition-transform group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </Reveal>
           ))}
         </div>
+
+        <div className="mt-10 sm:hidden">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 font-semibold text-sage-deep"
+          >
+            {dict.blog.viewAll}
+            <span aria-hidden className="text-lg">
+              →
+            </span>
+          </Link>
+        </div>
       </Container>
-    </Section>
+    </section>
   )
 }

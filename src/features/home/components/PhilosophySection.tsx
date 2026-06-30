@@ -1,57 +1,72 @@
 import Link from "next/link"
 import ImageSlider from "@/components/ImageSlider"
 import { getDefaultDictionary } from "@/lib/dictionaries"
-import { Section, Container } from "@/components/layout/Layout"
+import { Container } from "@/components/layout/Layout"
+import { Reveal } from "@/components/Reveal"
 
 const dict = getDefaultDictionary()
 
+const features = [
+  dict.philosophy.feature1,
+  dict.philosophy.feature2,
+  dict.philosophy.feature3,
+]
+
 export function PhilosophySection() {
   return (
-    <Section background="stone" className="py-20 lg:py-32">
+    <section className="bg-linen py-20 lg:py-28">
       <Container>
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div className="relative h-[500px]">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <Reveal className="relative h-[440px] lg:h-[520px]">
             <ImageSlider />
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold text-stone-900 mb-6 tracking-tight">
-              <span className="block text-lg text-stone-500 font-medium mb-2">{dict.philosophy.badge}</span>
-              {dict.philosophy.title}
+          </Reveal>
+
+          <Reveal delay={120}>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-sage-deep">
+              {dict.philosophy.badge}
+            </p>
+            <h2 className="mt-4 font-display text-3xl sm:text-4xl font-medium leading-tight tracking-tight text-ink">
+              가르치지 않습니다,
+              <br />
+              스스로 자라도록 돕습니다
             </h2>
-            <div className="space-y-6 text-lg text-stone-600 leading-relaxed">
-              <p>
-                {dict.philosophy.p1}
-              </p>
-              <p>
-                {dict.philosophy.p2}
-              </p>
-              <ul className="space-y-4 mt-4 text-base">
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-stone-200 text-stone-600 mr-3 mt-1">✓</span>
-                  <span>{dict.philosophy.feature1}</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-stone-200 text-stone-600 mr-3 mt-1">✓</span>
-                  <span>{dict.philosophy.feature2}</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-stone-200 text-stone-600 mr-3 mt-1">✓</span>
-                  <span>{dict.philosophy.feature3}</span>
-                </li>
-              </ul>
-              <div className="pt-6">
-                <Link 
-                  href="/montessori"
-                  className="inline-flex items-center gap-2 text-[#4e7a66] font-semibold hover:text-[#3c6150] transition-colors group"
-                >
-                  몬테소리 철학 더 보기
-                  <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
-                </Link>
-              </div>
+
+            <div className="mt-6 space-y-5 text-base leading-relaxed text-ink/70">
+              <p>{dict.philosophy.p1}</p>
+              <p>{dict.philosophy.p2}</p>
             </div>
-          </div>
+
+            <ul className="mt-8 space-y-4">
+              {features.map((feature) => (
+                <li key={feature} className="flex items-start gap-3.5">
+                  <span
+                    aria-hidden
+                    className="mt-1.5 h-5 w-1 shrink-0 rounded-sm bg-sage"
+                  />
+                  <span className="text-[15px] leading-relaxed text-ink/80">
+                    {feature}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8">
+              <Link
+                href="/montessori"
+                className="group inline-flex items-center gap-2 font-semibold text-sage-deep transition-colors hover:text-pine"
+              >
+                몬테소리 철학 더 보기
+                <span
+                  aria-hidden
+                  className="text-lg transition-transform group-hover:translate-x-1"
+                >
+                  →
+                </span>
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </Container>
-    </Section>
+    </section>
   )
 }
