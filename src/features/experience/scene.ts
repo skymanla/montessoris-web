@@ -41,7 +41,7 @@ export interface SceneCopy {
 
 export interface SceneCallbacks {
   onProgress: (placed: number, total: number) => void
-  onFeedback: (type: "success" | "error", message: string) => void
+  onFeedback: (type: "success" | "error" | "info", message: string) => void
   onComplete: () => void
 }
 
@@ -74,6 +74,7 @@ export class MaterialScene {
   private pieces: Piece[] = []
   private colliderMap = new Map<THREE.Object3D, Piece>()
   private placed = 0
+  private completedFired = false
   private dragging: Piece | null = null
   private activePointerId: number | null = null
   private hovered: Piece | null = null
@@ -85,8 +86,8 @@ export class MaterialScene {
   private clock = new THREE.Clock()
   private resizeObs: ResizeObserver
   private orientTimer: ReturnType<typeof setTimeout> | null = null
-  private baseDir = new THREE.Vector3()
   private baseDist = 1
+  private wasPortrait = false
 
   constructor(
     container: HTMLElement,
@@ -137,9 +138,8 @@ export class MaterialScene {
     this.controls.maxDistance = config.maxDistance
     this.controls.maxPolarAngle = config.maxPolarAngle
 
-    this.baseDir.copy(this.camera.position).sub(this.controls.target)
-    this.baseDist = this.baseDir.length()
-    this.baseDir.normalize()
+    this.baseDist = this.camera.position.distanceTo(this.controls.target)
+    this.wasPortrait = w / h < 1
     this.frameForAspect()
     this.controls.update()
     this.controls.saveState()
@@ -162,12 +162,17 @@ export class MaterialScene {
     this.animate()
   }
 
+  // Re-fit the framing distance for the current aspect, PRESERVING the user's
+  // current orbit direction (don't snap back to the construction-time angle).
   private frameForAspect() {
     const aspect = this.camera.aspect
     const factor = aspect < 1 ? Math.min(1.85, 0.92 / aspect) : 1
+    const dir = this.camera.position.clone().sub(this.controls.target)
+    if (dir.lengthSq() < 1e-6) dir.set(0, 0, 1)
+    dir.normalize()
     this.camera.position
       .copy(this.controls.target)
-      .addScaledVector(this.baseDir, this.baseDist * factor)
+      .addScaledVector(dir, this.baseDist * factor)
   }
 
   private buildLights() {
@@ -267,8 +272,17 @@ export class MaterialScene {
     }
   }
 
+  private endDrag() {
+    this.dragging = null
+    this.controls.enabled = true
+    this.renderer.domElement.style.cursor = "default"
+    this.hovered = null
+    this.releaseCapture()
+  }
+
   private onPointerDown = (e: PointerEvent) => {
     if (this.dragging) return // single-pointer lock
+    if (e.button !== 0) return // primary button / touch only
     this.setPointer(e)
     const piece = this.pick()
     if (piece) {
@@ -292,7 +306,11 @@ export class MaterialScene {
       this.setPointer(e)
       this.raycaster.setFromCamera(this.pointer, this.camera)
       const p = new THREE.Vector3()
-      if (this.raycaster.ray.intersectPlane(this.dragPlane, p)) {
+      if (
+        this.raycaster.ray.intersectPlane(this.dragPlane, p) &&
+        Math.abs(p.x) < 20 &&
+        Math.abs(p.z) < 20
+      ) {
         this.dragging.object.position.set(p.x, this.cfg.liftY, p.z)
       }
       return
@@ -309,10 +327,7 @@ export class MaterialScene {
     const piece = this.dragging
     if (!piece) return
     if (e && this.activePointerId !== null && e.pointerId !== this.activePointerId) return
-    this.dragging = null
-    this.controls.enabled = true
-    this.renderer.domElement.style.cursor = "default"
-    this.releaseCapture()
+    this.endDrag()
     if (!piece.hint) this.setEmissive(piece, 0x000000)
 
     const correctN = this.cfg.count - this.placed
@@ -332,6 +347,13 @@ export class MaterialScene {
       )
     } else {
       this.returnToOrigin(piece)
+      // correct piece dropped too far from its slot — re-prompt gently
+      if (isCorrect) {
+        this.cb.onFeedback(
+          "info",
+          this.placed === 0 ? this.copy.start : this.copy.progressPraise
+        )
+      }
     }
   }
 
@@ -341,10 +363,7 @@ export class MaterialScene {
     const piece = this.dragging
     if (!piece) return
     if (this.activePointerId !== null && e.pointerId !== this.activePointerId) return
-    this.dragging = null
-    this.controls.enabled = true
-    this.renderer.domElement.style.cursor = "default"
-    this.releaseCapture()
+    this.endDrag()
     if (!piece.hint) this.setEmissive(piece, 0x000000)
     this.returnToOrigin(piece)
   }
@@ -357,7 +376,10 @@ export class MaterialScene {
     piece.yawTarget = 0
     this.setEmissive(piece, 0x000000)
     this.animateTo(piece, targetPos, () => {
-      if (this.placed === this.cfg.count) this.cb.onComplete()
+      if (this.placed === this.cfg.count && !this.completedFired) {
+        this.completedFired = true
+        this.cb.onComplete()
+      }
     })
     this.cb.onProgress(this.placed, this.cfg.count)
     this.cb.onFeedback("success", this.copy.successChip)
@@ -378,6 +400,12 @@ export class MaterialScene {
     this.camera.aspect = w / h
     this.camera.updateProjectionMatrix()
     this.renderer.setSize(w, h)
+    // re-fit only when the orientation flips, so we don't stomp the user's zoom
+    const portrait = this.camera.aspect < 1
+    if (portrait !== this.wasPortrait) {
+      this.wasPortrait = portrait
+      this.frameForAspect()
+    }
   }
 
   private onOrient = () => {
@@ -403,6 +431,8 @@ export class MaterialScene {
   // ---- public controls ----
 
   reset() {
+    if (this.dragging) this.endDrag()
+    this.completedFired = false
     this.pieces.forEach((p) => {
       p.placed = false
       p.hint = false
@@ -437,7 +467,7 @@ export class MaterialScene {
       piece.materials.forEach((m) => m.emissive.setRGB(r, g, b))
     }
     this.cb.onFeedback(
-      "success",
+      "info",
       this.placed === 0 ? this.copy.start : this.copy.progressPraise
     )
   }
@@ -448,11 +478,13 @@ export class MaterialScene {
     const correctN = this.cfg.count - this.placed
     const piece = this.pieces.find((p) => p.n === correctN && !p.placed)
     if (!piece || piece.anim) return
-    if (piece === this.dragging) {
-      this.dragging = null
-      this.controls.enabled = true
-      this.renderer.domElement.style.cursor = "default"
-      this.releaseCapture()
+    if (this.dragging) {
+      const dragged = this.dragging
+      this.endDrag()
+      if (dragged !== piece) {
+        if (!dragged.hint) this.setEmissive(dragged, 0x000000)
+        this.returnToOrigin(dragged)
+      }
     }
     this.placePiece(piece)
   }

@@ -19,7 +19,7 @@ export const numberRodsConfig: MaterialSceneConfig = {
   minDistance: 3,
   maxDistance: 12,
   maxPolarAngle: 1.35,
-  liftY: 1.0,
+  liftY: 0.55, // below the lowest reachable camera height so the drag plane is always crossed
   placeRadius: 0.7,
   rugRadius: 3,
   grabEmissive: 0x3a1a18,

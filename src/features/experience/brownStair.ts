@@ -17,7 +17,7 @@ export const brownStairConfig: MaterialSceneConfig = {
   minDistance: 4,
   maxDistance: 16,
   maxPolarAngle: 1.42,
-  liftY: 1.4,
+  liftY: 0.8, // below the lowest reachable camera height so the drag plane is always crossed
   placeRadius: 1.0,
   rugRadius: 3.4,
   grabEmissive: 0x241812,

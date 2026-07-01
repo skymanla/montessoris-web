@@ -5,7 +5,7 @@ import Link from "next/link"
 import type { MaterialScene } from "./scene"
 import { getMaterial, type MaterialSlug } from "./materials"
 
-type Feedback = { type: "success" | "error"; msg: string; key: number }
+type Feedback = { type: "success" | "error" | "info"; msg: string; key: number }
 
 export default function ExperienceClient({ material }: { material: MaterialSlug }) {
   const meta = getMaterial(material)
@@ -15,6 +15,7 @@ export default function ExperienceClient({ material }: { material: MaterialSlug 
   const [placed, setPlaced] = useState(0)
   const [feedback, setFeedback] = useState<Feedback | null>(null)
   const [completed, setCompleted] = useState(false)
+  const [failed, setFailed] = useState(false)
 
   const total = meta?.pieceCount ?? 10
 
@@ -26,15 +27,20 @@ export default function ExperienceClient({ material }: { material: MaterialSlug 
     setPlaced(0)
     setCompleted(false)
     setFeedback(null)
+    setFailed(false)
 
-    import("./sceneLoader").then(({ createScene }) => {
-      if (disposed || !containerRef.current) return
-      sceneRef.current = createScene(meta.slug, containerRef.current, meta.copy, {
-        onProgress: (p) => setPlaced(p),
-        onFeedback: (type, msg) => setFeedback({ type, msg, key: ++fbKey }),
-        onComplete: () => setCompleted(true),
+    import("./sceneLoader")
+      .then(({ createScene }) => {
+        if (disposed || !containerRef.current) return
+        sceneRef.current = createScene(meta.slug, containerRef.current, meta.copy, {
+          onProgress: (p) => setPlaced(p),
+          onFeedback: (type, msg) => setFeedback({ type, msg, key: ++fbKey }),
+          onComplete: () => setCompleted(true),
+        })
       })
-    })
+      .catch(() => {
+        if (!disposed) setFailed(true)
+      })
 
     return () => {
       disposed = true
@@ -68,6 +74,34 @@ export default function ExperienceClient({ material }: { material: MaterialSlug 
   }, [completed])
 
   if (!meta) return null
+
+  if (failed) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-linen p-6 text-ink">
+        <div className="w-[min(440px,100%)] rounded-2xl border border-ink/10 bg-paper p-8 text-center shadow-[0_40px_80px_-40px_rgba(38,64,47,0.6)]">
+          <h1 className="font-display text-2xl font-medium">체험을 불러오지 못했어요</h1>
+          <p className="mt-3 leading-relaxed text-ink/70">
+            이 브라우저에서 3D(WebGL)를 사용할 수 없어요. 최신 브라우저에서 다시
+            시도하거나 다른 교구를 둘러보세요.
+          </p>
+          <div className="mt-7 flex flex-col gap-2.5 sm:flex-row sm:justify-center">
+            <Link
+              href="/experience/"
+              className="rounded-md bg-sage px-6 py-3 font-semibold text-white transition-colors hover:bg-sage-deep"
+            >
+              교구 선반으로
+            </Link>
+            <Link
+              href="/"
+              className="rounded-md border border-ink/15 px-6 py-3 font-semibold text-ink transition-colors hover:border-sage/50"
+            >
+              홈으로
+            </Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   const restart = () => {
     sceneRef.current?.reset()
@@ -142,10 +176,14 @@ export default function ExperienceClient({ material }: { material: MaterialSlug 
               className={`pointer-events-none absolute left-1/2 top-24 flex max-w-[calc(100vw-2rem)] -translate-x-1/2 items-center gap-2 rounded-full border px-4 py-2 text-center text-sm font-semibold backdrop-blur-sm ${
                 feedback.type === "success"
                   ? "border-sage/35 bg-sage/15 text-sage-deep"
-                  : "border-beech/40 bg-beech/15 text-[#9A6A34]"
+                  : feedback.type === "info"
+                    ? "border-moss/50 bg-moss-light/40 text-sage-deep"
+                    : "border-beech/40 bg-beech/15 text-[#9A6A34]"
               }`}
             >
-              <span aria-hidden>{feedback.type === "success" ? "✓" : "✋"}</span>
+              <span aria-hidden>
+                {feedback.type === "success" ? "✓" : feedback.type === "info" ? "💡" : "✋"}
+              </span>
               {feedback.msg}
             </div>
           )}
