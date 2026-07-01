@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Container } from "@/components/layout/Layout"
+import { trackCounselCtaClick } from "@/lib/analytics"
 
 export function CounselMockupSection() {
   const router = useRouter()
@@ -19,6 +20,7 @@ export function CounselMockupSection() {
   }, [])
 
   const handleCounselClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    trackCounselCtaClick("home_mockup")
     if (!isMobile) {
       e.preventDefault()
       router.push("?counsel=open")

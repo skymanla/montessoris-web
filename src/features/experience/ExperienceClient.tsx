@@ -4,6 +4,12 @@ import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import type { MaterialScene } from "./scene"
 import { getMaterial, type MaterialSlug } from "./materials"
+import {
+  trackExperienceComplete,
+  trackExperienceFirstInteraction,
+  trackExperienceLoadFailed,
+  trackExperienceStart,
+} from "@/lib/analytics"
 
 type Feedback = { type: "success" | "error" | "info"; msg: string; key: number }
 
@@ -12,6 +18,8 @@ export default function ExperienceClient({ material }: { material: MaterialSlug 
   const containerRef = useRef<HTMLDivElement>(null)
   const sceneRef = useRef<MaterialScene | null>(null)
   const dialogRef = useRef<HTMLDivElement>(null)
+  // 교구별 "첫 조각 배치" 이벤트를 1회만 보내기 위한 가드.
+  const interactedRef = useRef(false)
   const [placed, setPlaced] = useState(0)
   const [feedback, setFeedback] = useState<Feedback | null>(null)
   const [completed, setCompleted] = useState(false)
@@ -28,18 +36,32 @@ export default function ExperienceClient({ material }: { material: MaterialSlug 
     setCompleted(false)
     setFeedback(null)
     setFailed(false)
+    interactedRef.current = false
 
     import("./sceneLoader")
       .then(({ createScene }) => {
         if (disposed || !containerRef.current) return
         sceneRef.current = createScene(meta.slug, containerRef.current, meta.copy, {
-          onProgress: (p) => setPlaced(p),
+          onProgress: (p) => {
+            setPlaced(p)
+            if (p >= 1 && !interactedRef.current) {
+              interactedRef.current = true
+              trackExperienceFirstInteraction(meta.slug)
+            }
+          },
           onFeedback: (type, msg) => setFeedback({ type, msg, key: ++fbKey }),
-          onComplete: () => setCompleted(true),
+          onComplete: () => {
+            setCompleted(true)
+            trackExperienceComplete(meta.slug, meta.pieceCount ?? 10)
+          },
         })
+        trackExperienceStart(meta.slug, meta.name)
       })
       .catch(() => {
-        if (!disposed) setFailed(true)
+        if (!disposed) {
+          setFailed(true)
+          trackExperienceLoadFailed(meta.slug)
+        }
       })
 
     return () => {

@@ -5,6 +5,7 @@ import styles from './CounselWidget.module.css'
 import { useChatSession } from './useChatSession'
 import { isChromelessPath } from '@/lib/routes'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { trackCounselOpen } from '@/lib/analytics'
 
 /**
  * 몬테소리 상담 위젯.
@@ -17,7 +18,6 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 const SAGE = '#5f8d76'
 
 export default function CounselWidget() {
-  const [open, setOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -32,34 +32,35 @@ export default function CounselWidget() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  useEffect(() => {
-    if (searchParams.get('counsel') === 'open') {
-      setOpen(true)
-      // URL에서 쿼리 파라미터 정리
-      const params = new URLSearchParams(searchParams.toString())
-      params.delete('counsel')
-      const query = params.toString()
-      const cleanPath = query ? `${pathname}?${query}` : pathname
-      router.replace(cleanPath)
-    }
-  }, [searchParams, pathname, router])
-
   if (isChromelessPath(pathname)) {
     return null
   }
+
+  // 데스크톱 상담 팝업의 열림 여부는 URL(?counsel=open)을 단일 소스로 삼는다.
+  // 홈 CTA들도 router.push('?counsel=open') 로 동일하게 위젯을 연다.
+  // (effect 안에서 setState 하지 않으므로 cascading render / lint 이슈가 없다.)
+  const open = searchParams.get('counsel') === 'open'
 
   const handleOpen = () => {
     if (isMobile) {
       router.push('/counsel')
     } else {
-      setOpen(true)
+      router.push('?counsel=open')
     }
+  }
+
+  const handleClose = () => {
+    // URL에서 counsel 파라미터를 제거하면 팝업이 닫힌다.
+    const params = new URLSearchParams(searchParams.toString())
+    params.delete('counsel')
+    const query = params.toString()
+    router.replace(query ? `${pathname}?${query}` : pathname)
   }
 
   return (
     <>
       {!open && <Launcher onOpen={handleOpen} />}
-      {open && <CounselPanel onClose={() => setOpen(false)} />}
+      {open && <CounselPanel onClose={handleClose} />}
     </>
   )
 }
@@ -91,6 +92,11 @@ export function CounselPanel({
   const listRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const isBusy = status === 'thinking' || status === 'restoring'
+
+  // 상담 패널이 열림 (팝업/페이지 공통). 마운트 시 1회.
+  useEffect(() => {
+    trackCounselOpen(isPage ? 'page' : 'popup')
+  }, [isPage])
 
   // 모바일/브라우저 배경 스크롤 방지 (모달일 때만)
   useEffect(() => {
