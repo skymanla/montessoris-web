@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { getSortedPostsData } from "@/lib/posts";
 import { getDictionary } from "@/lib/dictionaries";
+import { MATERIALS } from "@/features/experience/materials";
 
 export const dynamic = "force-static";
 
@@ -18,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/benefits", priority: 0.8 },
     { path: "/blog", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/counsel", priority: 0.9, changeFrequency: "weekly" as const },
+    { path: "/experience", priority: 0.7 },
     { path: "/privacy", priority: 0.3 },
     { path: "/terms", priority: 0.3 },
   ].map((route) => ({
@@ -41,5 +43,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...benefitRoutes, ...blogPosts];
+  const experienceRoutes = MATERIALS.map((m) => ({
+    url: `${baseUrl}/experience/${m.slug}/`,
+    lastModified: staticLastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...benefitRoutes, ...experienceRoutes, ...blogPosts];
 }

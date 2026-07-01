@@ -52,6 +52,19 @@ export function webPageJsonLd({
   }
 }
 
+export function itemListJsonLd(items: Array<{ name: string; path: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      url: absoluteUrl(item.path),
+    })),
+  }
+}
+
 export function breadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
   return {
     "@context": "https://schema.org",

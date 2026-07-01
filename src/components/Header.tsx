@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { getDefaultDictionary } from "@/lib/dictionaries"
-import { isCounselPath } from "@/lib/routes"
+import { isChromelessPath } from "@/lib/routes"
 import { usePathname } from "next/navigation"
 
 const dict = getDefaultDictionary()
@@ -12,7 +12,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
 
-  if (isCounselPath(pathname)) {
+  if (isChromelessPath(pathname)) {
     return null
   }
 
@@ -24,6 +24,7 @@ export default function Header() {
     { name: dict.header.about, href: "/montessori" },
     { name: dict.header.benefits, href: "/benefits" },
     { name: dict.header.programs, href: "/programs" },
+    { name: "체험", href: "/experience" },
     { name: "블로그", href: "/blog" },
   ]
 
@@ -55,7 +56,7 @@ export default function Header() {
             <button
               type="button"
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-ink/70 hover:text-ink hover:bg-ink/5 focus:outline-none transition-colors"
+              className="inline-flex items-center justify-center p-2 rounded-md text-ink/70 hover:text-ink hover:bg-ink/5 transition-colors"
               aria-controls="mobile-navigation"
               aria-expanded={isOpen}
               aria-label={isOpen ? "메뉴 닫기" : "메뉴 열기"}
