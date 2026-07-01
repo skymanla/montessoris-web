@@ -3,6 +3,7 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import Link from "next/link"
 import { Metadata } from "next"
 import JsonLd from "@/components/JsonLd"
+import ArticleAnalytics from "@/components/ArticleAnalytics"
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/structured-data"
 import { createPageMetadata } from "@/lib/metadata"
 
@@ -47,6 +48,7 @@ export default async function BlogPost({ params }: Props) {
   return (
     <>
       <JsonLd data={[articleJsonLd(postData), breadcrumbSchema]} />
+      <ArticleAnalytics slug={postData.id} title={postData.title} date={postData.date} />
       <article className="pt-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pb-20 pt-16">
           <Link

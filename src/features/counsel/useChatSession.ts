@@ -6,6 +6,13 @@ import {
   sendChatMessage,
 } from './chatApi';
 import { loadStoredSessionId, persistSessionId } from './chatStorage';
+import {
+  trackCounselConversationStarted,
+  trackCounselError,
+  trackCounselMessageSent,
+  trackCounselReplyReceived,
+  trackCounselReset,
+} from '@/lib/analytics';
 
 export type ChatStatus = 'idle' | 'thinking' | 'error' | 'restoring';
 
@@ -31,6 +38,8 @@ export function useChatSession() {
   const [error, setError] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
   const seqRef = useRef(1);
+  // 이번 방문에서 사용자가 보낸 메시지 누적 수 (analytics 용).
+  const sentCountRef = useRef(0);
 
   const nextId = () => `m-${seqRef.current++}`;
 
@@ -78,6 +87,11 @@ export function useChatSession() {
       setStatus('thinking');
       setError(null);
 
+      const messageIndex = (sentCountRef.current += 1);
+      const resumed = !!sessionId;
+      trackCounselMessageSent(messageIndex, resumed);
+      if (messageIndex === 1) trackCounselConversationStarted(resumed);
+
       abortRef.current?.abort();
       const controller = new AbortController();
       abortRef.current = controller;
@@ -97,6 +111,7 @@ export function useChatSession() {
           { id: nextId(), role: 'assistant', content, followUps },
         ]);
         setStatus('idle');
+        trackCounselReplyReceived(messageIndex);
       } catch (e) {
         if (e instanceof DOMException && e.name === 'AbortError') return;
         const message = e instanceof Error ? e.message : '잠시 후 다시 이야기 나눠요.';
@@ -106,6 +121,7 @@ export function useChatSession() {
           { id: nextId(), role: 'assistant', content: message, isError: true },
         ]);
         setStatus('error');
+        trackCounselError(message);
       }
     },
     [sessionId, status],
@@ -118,6 +134,8 @@ export function useChatSession() {
     setMessages([WELCOME]);
     setStatus('idle');
     setError(null);
+    sentCountRef.current = 0;
+    trackCounselReset();
   }, []);
 
   return { sessionId, messages, status, error, send, reset };

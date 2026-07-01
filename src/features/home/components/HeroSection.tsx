@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { getDefaultDictionary } from "@/lib/dictionaries"
 import { RodStaircase } from "@/components/Measure"
+import { trackCounselCtaClick } from "@/lib/analytics"
 
 const dict = getDefaultDictionary()
 
@@ -22,6 +23,7 @@ export function HeroSection() {
   }, [])
 
   const handleCounselClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    trackCounselCtaClick("hero")
     if (!isMobile) {
       e.preventDefault()
       router.push("?counsel=open")
