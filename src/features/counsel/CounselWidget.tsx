@@ -3,7 +3,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styles from './CounselWidget.module.css'
 import { useChatSession } from './useChatSession'
-import { isCounselPath } from '@/lib/routes'
+import { isChromelessPath } from '@/lib/routes'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 /**
@@ -44,7 +44,7 @@ export default function CounselWidget() {
     }
   }, [searchParams, pathname, router])
 
-  if (isCounselPath(pathname)) {
+  if (isChromelessPath(pathname)) {
     return null
   }
 

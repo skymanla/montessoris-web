@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { getDefaultDictionary } from "@/lib/dictionaries"
-import { isCounselPath } from "@/lib/routes"
+import { isChromelessPath } from "@/lib/routes"
 import { usePathname } from "next/navigation"
 
 const dict = getDefaultDictionary()
@@ -10,7 +10,7 @@ const dict = getDefaultDictionary()
 export default function Footer() {
   const pathname = usePathname()
 
-  if (isCounselPath(pathname)) {
+  if (isChromelessPath(pathname)) {
     return null
   }
 
