@@ -2,7 +2,12 @@ import { Metadata } from "next"
 import BenefitDetailClient from "./BenefitDetailClient"
 import { getDefaultDictionary } from "@/lib/dictionaries"
 import JsonLd from "@/components/JsonLd"
-import { breadcrumbJsonLd } from "@/lib/structured-data"
+import {
+  breadcrumbJsonLd,
+  definedTermJsonLd,
+  faqPageJsonLd,
+} from "@/lib/structured-data"
+import { getDefinition } from "@/lib/definitions"
 import { createPageMetadata } from "@/lib/metadata"
 
 const dict = getDefaultDictionary()
@@ -29,6 +34,7 @@ export function generateStaticParams() {
 export default async function Page({ params }: Props) {
   const { id } = await params
   const benefit = dict.benefits.items.find((item: { id: string }) => item.id === id)
+  const def = getDefinition(`benefits-${id}`)
   const breadcrumbSchema = breadcrumbJsonLd([
     { name: "홈", path: "/" },
     { name: "몬테소리 교육의 장점", path: "/benefits/" },
@@ -37,7 +43,14 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <JsonLd data={breadcrumbSchema} />
+      <JsonLd
+        data={[
+          breadcrumbSchema,
+          ...(def
+            ? [definedTermJsonLd(def), faqPageJsonLd(def.faq, `/benefits/${id}/`)]
+            : []),
+        ]}
+      />
       <BenefitDetailClient id={id} />
     </>
   )

@@ -3,7 +3,12 @@ import { notFound } from "next/navigation"
 import ExperienceClient from "@/features/experience/ExperienceClient"
 import { MATERIALS, getMaterial } from "@/features/experience/materials"
 import JsonLd from "@/components/JsonLd"
-import { breadcrumbJsonLd } from "@/lib/structured-data"
+import {
+  breadcrumbJsonLd,
+  definedTermJsonLd,
+  faqPageJsonLd,
+} from "@/lib/structured-data"
+import { getDefinition } from "@/lib/definitions"
 import { createPageMetadata } from "@/lib/metadata"
 
 type Props = { params: Promise<{ material: string }> }
@@ -35,10 +40,22 @@ export default async function ExperienceScenePage({ params }: Props) {
     { name: "교구 체험", path: "/experience/" },
     { name: m.name, path: `/experience/${m.slug}/` },
   ])
+  // 몰입형 3D 화면이라 본문 텍스트 슬롯이 없음 → 정의는 DefinedTerm/FAQPage 구조화 데이터로 노출.
+  const def = getDefinition(`experience-${m.slug}`)
 
   return (
     <>
-      <JsonLd data={breadcrumb} />
+      <JsonLd
+        data={[
+          breadcrumb,
+          ...(def
+            ? [
+                definedTermJsonLd(def),
+                faqPageJsonLd(def.faq, `/experience/${m.slug}/`),
+              ]
+            : []),
+        ]}
+      />
       <ExperienceClient material={m.slug} />
     </>
   )

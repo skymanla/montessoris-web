@@ -1,5 +1,7 @@
 import { getDefaultDictionary } from "@/lib/dictionaries"
 import { PageHeader } from "@/components/PageHeader"
+import DefinitionLead from "@/components/DefinitionLead"
+import DefinitionFaq from "@/components/DefinitionFaq"
 
 const dict = getDefaultDictionary()
 
@@ -21,6 +23,11 @@ export default function ProgramsClient() {
       />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        {/* 정의 front-load — 프로그램이 무엇인지 직접 답. */}
+        <div className="mx-auto mb-16 max-w-3xl">
+          <DefinitionLead slug="programs" />
+        </div>
+
         <p className="mb-8 font-mono text-xs uppercase tracking-[0.2em] text-sage-deep">
           Nido → Infant Community → Casa → 부모 코칭
         </p>
@@ -67,6 +74,11 @@ export default function ProgramsClient() {
             ))}
           </div>
         </section>
+
+        {/* FAQ */}
+        <div className="mx-auto mt-20 max-w-3xl lg:mt-28">
+          <DefinitionFaq slug="programs" />
+        </div>
       </div>
     </div>
   )

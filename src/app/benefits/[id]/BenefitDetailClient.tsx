@@ -6,6 +6,8 @@ import {
   GlyphPair,
   GlyphTriangle,
 } from "@/components/MaterialGlyph"
+import DefinitionLead from "@/components/DefinitionLead"
+import DefinitionFaq from "@/components/DefinitionFaq"
 
 const dict = getDefaultDictionary()
 
@@ -63,8 +65,16 @@ export default function BenefitDetailClient({ id }: { id: string }) {
             <p className="mt-5 text-xl leading-relaxed text-ink/60">{benefit.desc}</p>
           </header>
 
+          {/* 정의 front-load — 이 장점이 무엇인지/어떻게 길러지는지 직접 답. */}
+          <DefinitionLead slug={`benefits-${id}`} className="mb-12" />
+
           <div className="prose prose-neutral max-w-none prose-p:leading-relaxed prose-p:text-ink/75">
             <p className="whitespace-pre-line text-lg">{benefit.content}</p>
+          </div>
+
+          {/* FAQ */}
+          <div className="mt-16">
+            <DefinitionFaq slug={`benefits-${id}`} />
           </div>
 
           <div className="mt-16 rounded-2xl bg-linen p-8 sm:p-10">
