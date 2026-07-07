@@ -87,7 +87,7 @@ export function HeroSection() {
               onClick={handleCounselClick}
               className="inline-flex items-center justify-center gap-2 rounded-md border border-moss/40 px-7 py-4 text-base font-semibold text-paper transition-colors hover:border-moss hover:bg-white/[0.06]"
             >
-              AI 육아 상담 받기
+              무료 AI 몬테소리 상담 받기
               <span aria-hidden>→</span>
             </Link>
           </div>

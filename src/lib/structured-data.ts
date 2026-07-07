@@ -102,21 +102,66 @@ export function definedTermJsonLd(entry: DefinitionEntry) {
   }
 }
 
-// 페이지 하단 FAQ 블록(DefinitionFaq)과 1:1 대응하는 FAQPage 스키마.
-export function faqPageJsonLd(faq: FaqItem[], path: string) {
+type FaqJsonLdItem = FaqItem | { question: string; answer: string }
+
+function normalizeFaqItem(item: FaqJsonLdItem) {
+  if ("q" in item) {
+    return { question: item.q, answer: item.a }
+  }
+  return item
+}
+
+// 페이지 하단 FAQ 블록(DefinitionFaq) 또는 교구/상담 FAQ와 대응하는 FAQPage 스키마.
+export function faqPageJsonLd(faq: FaqJsonLdItem[], path?: string) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "@id": `${absoluteUrl(path)}#faq`,
+    ...(path ? { "@id": `${absoluteUrl(path)}#faq` } : {}),
     inLanguage: siteConfig.language,
-    mainEntity: faq.map((item) => ({
-      "@type": "Question",
-      name: item.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.a,
-      },
-    })),
+    mainEntity: faq.map((item) => {
+      const normalized = normalizeFaqItem(item)
+      return {
+        "@type": "Question",
+        name: normalized.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: normalized.answer,
+        },
+      }
+    }),
+  }
+}
+
+export function learningResourceJsonLd({
+  name,
+  description,
+  path,
+  age,
+  keywords,
+}: {
+  name: string
+  description: string
+  path: string
+  age: string
+  keywords?: string[]
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    name,
+    description,
+    url: absoluteUrl(path),
+    inLanguage: siteConfig.language,
+    learningResourceType: "Interactive Montessori material guide",
+    educationalUse: ["sensorial exploration", "home activity"],
+    typicalAgeRange: age,
+    keywords,
+    provider: {
+      "@id": `${siteConfig.url}/#organization`,
+    },
+    isPartOf: {
+      "@id": `${siteConfig.url}/#website`,
+    },
   }
 }
 
@@ -138,7 +183,7 @@ export function articleJsonLd(post: PostData) {
     publisher: {
       "@id": `${siteConfig.url}/#organization`,
     },
-    image: absoluteUrl(siteConfig.ogImage),
+    image: absoluteUrl(post.image || siteConfig.ogImage),
     inLanguage: siteConfig.language,
   }
 }

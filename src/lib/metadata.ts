@@ -6,6 +6,7 @@ type PageMetadataOptions = {
   description: string
   path: string
   image?: string
+  keywords?: string[]
   openGraph?: NonNullable<Metadata["openGraph"]>
   robots?: Metadata["robots"]
 }
@@ -15,12 +16,14 @@ export function createPageMetadata({
   description,
   path,
   image = siteConfig.ogImage,
+  keywords,
   openGraph,
   robots,
 }: PageMetadataOptions): Metadata {
   return {
     title,
     description,
+    ...(keywords ? { keywords } : {}),
     alternates: {
       canonical: path,
       types: {

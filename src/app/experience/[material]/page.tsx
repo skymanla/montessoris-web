@@ -7,6 +7,7 @@ import {
   breadcrumbJsonLd,
   definedTermJsonLd,
   faqPageJsonLd,
+  learningResourceJsonLd,
 } from "@/lib/structured-data"
 import { getDefinition } from "@/lib/definitions"
 import { createPageMetadata } from "@/lib/metadata"
@@ -24,9 +25,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const m = getMaterial(material)
   if (!m) return {}
   return createPageMetadata({
-    title: `교구 체험 — ${m.name}`,
+    title: `몬테소리 ${m.name} 사용법 — 3D 교구 체험`,
     description: m.metaDescription,
     path: `/experience/${m.slug}/`,
+    keywords: m.guide.keywords,
   })
 }
 
@@ -35,27 +37,30 @@ export default async function ExperienceScenePage({ params }: Props) {
   const m = getMaterial(material)
   if (!m) notFound()
 
-  const breadcrumb = breadcrumbJsonLd([
-    { name: "홈", path: "/" },
-    { name: "교구 체험", path: "/experience/" },
-    { name: m.name, path: `/experience/${m.slug}/` },
-  ])
-  // 몰입형 3D 화면이라 본문 텍스트 슬롯이 없음 → 정의는 DefinedTerm/FAQPage 구조화 데이터로 노출.
   const def = getDefinition(`experience-${m.slug}`)
+  const structuredData = [
+    breadcrumbJsonLd([
+      { name: "홈", path: "/" },
+      { name: "교구 체험", path: "/experience/" },
+      { name: m.name, path: `/experience/${m.slug}/` },
+    ]),
+    learningResourceJsonLd({
+      name: `몬테소리 ${m.name} 사용법`,
+      description: m.guide.definition,
+      path: `/experience/${m.slug}/`,
+      age: m.age,
+      keywords: m.guide.keywords,
+    }),
+    faqPageJsonLd(
+      [...m.guide.faqs, ...(def?.faq ?? [])],
+      `/experience/${m.slug}/`
+    ),
+    ...(def ? [definedTermJsonLd(def)] : []),
+  ]
 
   return (
     <>
-      <JsonLd
-        data={[
-          breadcrumb,
-          ...(def
-            ? [
-                definedTermJsonLd(def),
-                faqPageJsonLd(def.faq, `/experience/${m.slug}/`),
-              ]
-            : []),
-        ]}
-      />
+      <JsonLd data={structuredData} />
       <ExperienceClient material={m.slug} />
     </>
   )

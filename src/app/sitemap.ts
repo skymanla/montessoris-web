@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/benefits", priority: 0.8 },
     { path: "/blog", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/counsel", priority: 0.9, changeFrequency: "weekly" as const },
-    { path: "/experience", priority: 0.7 },
+    { path: "/experience", priority: 0.85, changeFrequency: "weekly" as const },
     { path: "/privacy", priority: 0.3 },
     { path: "/terms", priority: 0.3 },
   ].map((route) => ({
@@ -47,7 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}/experience/${m.slug}/`,
     lastModified: staticLastModified,
     changeFrequency: "monthly" as const,
-    priority: 0.6,
+    priority: 0.7,
   }));
 
   return [...staticRoutes, ...benefitRoutes, ...experienceRoutes, ...blogPosts];
