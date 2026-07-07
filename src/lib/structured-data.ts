@@ -78,6 +78,56 @@ export function breadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
   }
 }
 
+export function faqPageJsonLd(
+  questions: Array<{ question: string; answer: string }>
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: questions.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  }
+}
+
+export function learningResourceJsonLd({
+  name,
+  description,
+  path,
+  age,
+  keywords,
+}: {
+  name: string
+  description: string
+  path: string
+  age: string
+  keywords?: string[]
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    name,
+    description,
+    url: absoluteUrl(path),
+    inLanguage: siteConfig.language,
+    learningResourceType: "Interactive Montessori material guide",
+    educationalUse: ["sensorial exploration", "home activity"],
+    typicalAgeRange: age,
+    keywords,
+    provider: {
+      "@id": `${siteConfig.url}/#organization`,
+    },
+    isPartOf: {
+      "@id": `${siteConfig.url}/#website`,
+    },
+  }
+}
+
 export function articleJsonLd(post: PostData) {
   const canonicalPath = `/blog/${post.id}/`
 
@@ -96,7 +146,7 @@ export function articleJsonLd(post: PostData) {
     publisher: {
       "@id": `${siteConfig.url}/#organization`,
     },
-    image: absoluteUrl(siteConfig.ogImage),
+    image: absoluteUrl(post.image || siteConfig.ogImage),
     inLanguage: siteConfig.language,
   }
 }

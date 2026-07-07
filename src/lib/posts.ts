@@ -9,6 +9,8 @@ const PostFrontmatterSchema = z.object({
   date: z.string(),
   title: z.string(),
   description: z.string(),
+  image: z.string().optional(),
+  imageAlt: z.string().optional(),
 })
 
 export type PostData = z.infer<typeof PostFrontmatterSchema> & {

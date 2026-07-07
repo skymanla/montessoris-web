@@ -233,6 +233,55 @@ export default function ExperienceClient({ material }: { material: MaterialSlug 
             <p className="mt-3.5 text-[15px] leading-relaxed" aria-live="polite">
               {instruction}
             </p>
+            <details className="pointer-events-auto mt-4 border-t border-ink/10 pt-3 text-sm">
+              <summary className="cursor-pointer list-none font-semibold text-sage-deep">
+                {meta.name} 교구 가이드 보기
+                <span aria-hidden className="float-right">+</span>
+              </summary>
+              <div className="mt-3 space-y-3 leading-relaxed text-ink/70">
+                <p>{meta.guide.definition}</p>
+                <dl className="space-y-2">
+                  <div>
+                    <dt className="font-semibold text-ink">언제 해보면 좋을까요</dt>
+                    <dd>{meta.age}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold text-ink">아이에게 남는 것</dt>
+                    <dd>{meta.guide.purpose}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold text-ink">집에서 해보기</dt>
+                    <dd>{meta.guide.homeActivity}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold text-ink">엄마 팁</dt>
+                    <dd>{meta.guide.parentTip}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold text-ink">기다려줄 부분</dt>
+                    <dd>{meta.guide.commonMistake}</dd>
+                  </div>
+                </dl>
+                <div>
+                  <p className="font-semibold text-ink">엄마들이 자주 묻는 말</p>
+                  <ul className="mt-2 space-y-2">
+                    {meta.guide.faqs.map((item) => (
+                      <li key={item.question}>
+                        <p className="font-semibold text-ink">{item.question}</p>
+                        <p>{item.answer}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Link
+                  href="/counsel/"
+                  className="inline-flex items-center gap-1.5 font-semibold text-sage-deep transition-colors hover:text-pine"
+                >
+                  24시간 무료 AI 몬테소리 육아 상담으로 질문하기
+                  <span aria-hidden>→</span>
+                </Link>
+              </div>
+            </details>
             <div
               className="mt-4 flex h-6 items-end gap-[5px]"
               role="progressbar"
@@ -290,6 +339,12 @@ export default function ExperienceClient({ material }: { material: MaterialSlug 
                 className="rounded-md border border-ink/15 px-6 py-3 font-semibold text-ink transition-colors hover:border-sage/50"
               >
                 다른 교구 고르기
+              </Link>
+              <Link
+                href="/counsel/"
+                className="rounded-md border border-sage/35 px-6 py-3 font-semibold text-sage-deep transition-colors hover:border-sage hover:text-pine"
+              >
+                무료 AI 상담
               </Link>
             </div>
           </div>

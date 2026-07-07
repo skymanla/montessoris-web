@@ -24,7 +24,7 @@ export default function Header() {
     { name: dict.header.about, href: "/montessori" },
     { name: dict.header.benefits, href: "/benefits" },
     { name: dict.header.programs, href: "/programs" },
-    { name: "체험", href: "/experience" },
+    { name: "교구 가이드", href: "/experience" },
     { name: "블로그", href: "/blog" },
   ]
 

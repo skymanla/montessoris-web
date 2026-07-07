@@ -1,6 +1,7 @@
 import { getPostData, getAllPostIds, getSortedPostsData } from "@/lib/posts"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import Link from "next/link"
+import Image from "next/image"
 import { Metadata } from "next"
 import JsonLd from "@/components/JsonLd"
 import ArticleAnalytics from "@/components/ArticleAnalytics"
@@ -18,6 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: postData.title,
     description: postData.description,
     path: `/blog/${slug}/`,
+    image: postData.image,
     openGraph: {
       type: "article",
       publishedTime: postData.date,
@@ -73,6 +75,21 @@ export default async function BlogPost({ params }: Props) {
             </p>
           </header>
 
+          {postData.image && (
+            <figure className="mb-12 overflow-hidden rounded-lg border border-ink/10 bg-linen">
+              <div className="relative aspect-[16/9] w-full">
+                <Image
+                  src={postData.image}
+                  alt={postData.imageAlt || postData.title}
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 768px, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            </figure>
+          )}
+
           <div className="prose prose-neutral prose-lg max-w-none prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-ink prose-p:text-ink/80 prose-li:text-ink/80 prose-strong:text-ink prose-a:text-sage-deep prose-a:no-underline hover:prose-a:underline prose-blockquote:border-sage prose-blockquote:text-ink/70 prose-img:rounded-lg">
             {/* @ts-expect-error Server Component */}
             <MDXRemote source={postData.content} />
@@ -90,6 +107,17 @@ export default async function BlogPost({ params }: Props) {
                   href={`/blog/${post.id}`}
                   className="group rounded-xl border border-ink/10 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-sage/50 hover:shadow-[0_18px_44px_-26px_rgba(38,64,47,0.4)]"
                 >
+                  {post.image && (
+                    <div className="relative mb-5 aspect-[16/9] w-full overflow-hidden rounded-md">
+                      <Image
+                        src={post.image}
+                        alt={post.imageAlt || post.title}
+                        fill
+                        sizes="(min-width: 768px) 336px, 100vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
                   <time className="block font-mono text-xs uppercase tracking-wider text-ink/40">
                     {post.date}
                   </time>

@@ -38,7 +38,7 @@ export function CounselMockupSection() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sage opacity-60" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-sage" />
               </span>
-              24시간 실시간 상담
+              24시간 무료 AI 몬테소리 육아 상담
             </div>
 
             <h2 className="mt-5 font-display text-3xl sm:text-4xl font-medium leading-tight tracking-tight text-ink">
@@ -49,9 +49,9 @@ export function CounselMockupSection() {
             </h2>
 
             <p className="mt-6 text-base sm:text-lg leading-relaxed text-ink/70">
-              미국 몬테소리 협회(AMS) 기준의 정통 육아 이론을 학습한 안심 AI 상담사
-              마리가 대기하고 있습니다. 가정 환경 구성부터 훈육 고민까지, 언제
-              어디서나 따뜻한 길잡이가 되어 드립니다.
+              아이 마음은 알고 싶은데 오늘은 엄마 마음도 지친 날이 있죠. AI 마리
+              선생님이 가정 환경 구성부터 훈육 고민까지, 몬테소리 관점으로 차분히
+              같이 풀어드립니다.
             </p>
 
             <div className="mt-8">
@@ -60,7 +60,7 @@ export function CounselMockupSection() {
                 onClick={handleCounselClick}
                 className="inline-flex items-center gap-2 rounded-md bg-sage px-6 py-3.5 font-semibold text-white transition-colors hover:bg-sage-deep"
               >
-                무료 AI 상담 시작하기
+                무료 AI 몬테소리 육아 상담 시작하기
                 <span aria-hidden className="text-lg">
                   →
                 </span>
@@ -127,25 +127,24 @@ export function CounselMockupSection() {
                   </span>
                   <div className="max-w-[85%] space-y-2 rounded-2xl rounded-bl-sm border border-ink/10 bg-white px-4 py-3 leading-relaxed text-ink/80 shadow-sm">
                     <p>
-                      아이가 물건을 던지는 행동은 무조건적인 말썽이라기보다{" "}
+                      아이가 물건을 던질 때 꼭 말썽을 부리는 건 아닐 수 있어요.{" "}
                       <strong className="font-semibold text-ink">
-                        중력과 포물선 궤적을 관찰하고자 하는 정상적인 감각적
-                        흥미
+                        떨어지는 모습이 신기해서 몇 번이고 확인해 보고 싶은 마음
                       </strong>
-                      일 가능성이 큽니다.
+                      이 숨어 있을 수 있습니다.
                     </p>
                     <p className="font-semibold text-sage-deep">
                       몬테소리 안심 제안:
                     </p>
                     <ul className="list-inside list-disc space-y-1 pl-1 text-[13px] text-ink/65">
                       <li>
-                        <strong className="text-ink">대체 욕구 해소</strong>:
+                        <strong className="text-ink">던지고 싶은 마음 받아주기</strong>:
                         “이것은 던지는 게 아니야”라고 제한하는 대신, “대신 이
                         부드러운 공은 던져도 돼”라며 던질 수 있는 바구니와 안전한
                         물건(펠트공, 양말 뭉치)을 마련해 주세요.
                       </li>
                       <li>
-                        <strong className="text-ink">명확한 한계 설정</strong>:
+                        <strong className="text-ink">다치지 않게 선 그어주기</strong>:
                         단단하거나 위험한 것을 던지려 할 때는 단호하되 평온한
                         목소리로 손을 부드럽게 잡으며 “물건은 다치게 할 수
                         있어”라고 알려줍니다.
@@ -157,8 +156,7 @@ export function CounselMockupSection() {
                 {/* 두번째 부모 메시지 */}
                 <div className="flex justify-end">
                   <div className="max-w-[85%] rounded-2xl rounded-br-sm bg-sage px-4 py-3 leading-relaxed text-white shadow-sm">
-                    가정에서 몬테소리 환경을 만들어 줄 때 가장 중요한 핵심이
-                    무엇인가요?
+                    집에서 몬테소리처럼 해주고 싶은데 어디부터 바꾸면 좋을까요?
                   </div>
                 </div>
 
@@ -176,13 +174,12 @@ export function CounselMockupSection() {
                     </svg>
                   </span>
                   <div className="max-w-[85%] rounded-2xl rounded-bl-sm border border-ink/10 bg-white px-4 py-3 leading-relaxed text-ink/80 shadow-sm">
-                    가장 중요한 것은{" "}
+                    처음에는 거창하게 바꾸지 않아도 괜찮아요. 먼저{" "}
                     <strong className="font-semibold text-ink">
-                      ‘아이의 눈높이에 맞춘 독립적 환경(Prepared Environment)’
+                      아이 손이 닿는 곳에 스스로 꺼내고 다시 놓을 자리를 만들어 주는 것
                     </strong>
-                    입니다. 스스로 교구를 선택하고 스스로 정리할 수 있도록 낮은
-                    2단 교구장을 배치하고, 아이의 힘으로 들 수 있는 가벼운 쟁반을
-                    마련해 내면의 질서감을 가꿔주세요.
+                    부터 시작해 보세요. 낮은 교구장 하나, 아이가 들 수 있는 작은
+                    쟁반 하나만으로도 아이는 “내가 할 수 있네” 하는 마음을 경험합니다.
                   </div>
                 </div>
               </div>
