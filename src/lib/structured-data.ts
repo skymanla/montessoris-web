@@ -1,5 +1,6 @@
 import { absoluteUrl, siteConfig } from "@/lib/site"
 import type { PostData } from "@/lib/posts"
+import type { DefinitionEntry, FaqItem } from "@/lib/definitions"
 
 export const organizationJsonLd = {
   "@context": "https://schema.org",
@@ -78,20 +79,56 @@ export function breadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
   }
 }
 
-export function faqPageJsonLd(
-  questions: Array<{ question: string; answer: string }>
-) {
+// 정의형 페이지의 핵심 용어를 schema.org DefinedTerm으로 노출 —
+// AI가 정의 답변을 하나의 엔티티로 신뢰·연결하도록 돕는다.
+export function definedTermJsonLd(entry: DefinitionEntry) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "@id": `${entry.url}#definedterm`,
+    name: entry.term,
+    description: entry.shortDef,
+    url: entry.url,
+    inLanguage: siteConfig.language,
+    inDefinedTermSet: {
+      "@type": "DefinedTermSet",
+      "@id": `${siteConfig.url}/#montessori-glossary`,
+      name: "몬테소리 용어 사전",
+      url: absoluteUrl("/montessori/"),
+      publisher: {
+        "@id": `${siteConfig.url}/#organization`,
+      },
+    },
+  }
+}
+
+type FaqJsonLdItem = FaqItem | { question: string; answer: string }
+
+function normalizeFaqItem(item: FaqJsonLdItem) {
+  if ("q" in item) {
+    return { question: item.q, answer: item.a }
+  }
+  return item
+}
+
+// 페이지 하단 FAQ 블록(DefinitionFaq) 또는 교구/상담 FAQ와 대응하는 FAQPage 스키마.
+export function faqPageJsonLd(faq: FaqJsonLdItem[], path?: string) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: questions.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
+    ...(path ? { "@id": `${absoluteUrl(path)}#faq` } : {}),
+    inLanguage: siteConfig.language,
+    mainEntity: faq.map((item) => {
+      const normalized = normalizeFaqItem(item)
+      return {
+        "@type": "Question",
+        name: normalized.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: normalized.answer,
+        },
+      }
+    }),
   }
 }
 

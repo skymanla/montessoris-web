@@ -5,7 +5,15 @@ import Image from "next/image"
 import { Metadata } from "next"
 import JsonLd from "@/components/JsonLd"
 import ArticleAnalytics from "@/components/ArticleAnalytics"
-import { articleJsonLd, breadcrumbJsonLd } from "@/lib/structured-data"
+import {
+  articleJsonLd,
+  breadcrumbJsonLd,
+  definedTermJsonLd,
+  faqPageJsonLd,
+} from "@/lib/structured-data"
+import { getDefinition } from "@/lib/definitions"
+import DefinitionLead from "@/components/DefinitionLead"
+import DefinitionFaq from "@/components/DefinitionFaq"
 import { createPageMetadata } from "@/lib/metadata"
 
 type Props = {
@@ -46,10 +54,20 @@ export default async function BlogPost({ params }: Props) {
     { name: "블로그", path: "/blog/" },
     { name: postData.title, path: `/blog/${postData.id}/` },
   ])
+  // 정의형/개념형 글에만 정의 리드·FAQ·구조화 데이터를 얹는다 (에세이형 글은 그대로).
+  const def = getDefinition(slug)
 
   return (
     <>
-      <JsonLd data={[articleJsonLd(postData), breadcrumbSchema]} />
+      <JsonLd
+        data={[
+          articleJsonLd(postData),
+          breadcrumbSchema,
+          ...(def
+            ? [definedTermJsonLd(def), faqPageJsonLd(def.faq, `/blog/${slug}/`)]
+            : []),
+        ]}
+      />
       <ArticleAnalytics slug={postData.id} title={postData.title} date={postData.date} />
       <article className="pt-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pb-20 pt-16">
@@ -75,6 +93,9 @@ export default async function BlogPost({ params }: Props) {
             </p>
           </header>
 
+          {/* 정의 front-load — 본문 최상단에 정의형 쿼리 직접 답. 에세이형 글엔 렌더 안 됨(null). */}
+          <DefinitionLead slug={slug} className="mb-10" />
+
           {postData.image && (
             <figure className="mb-12 overflow-hidden rounded-lg border border-ink/10 bg-linen">
               <div className="relative aspect-[16/9] w-full">
@@ -93,6 +114,11 @@ export default async function BlogPost({ params }: Props) {
           <div className="prose prose-neutral prose-lg max-w-none prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-ink prose-p:text-ink/80 prose-li:text-ink/80 prose-strong:text-ink prose-a:text-sage-deep prose-a:no-underline hover:prose-a:underline prose-blockquote:border-sage prose-blockquote:text-ink/70 prose-img:rounded-lg">
             {/* @ts-expect-error Server Component */}
             <MDXRemote source={postData.content} />
+          </div>
+
+          {/* FAQ — 정의형 글에만 표시 */}
+          <div className="mt-16">
+            <DefinitionFaq slug={slug} />
           </div>
 
           {/* 관련 게시글 */}

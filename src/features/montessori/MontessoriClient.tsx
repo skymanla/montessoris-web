@@ -2,6 +2,8 @@ import Image from "next/image"
 import { getDefaultDictionary } from "@/lib/dictionaries"
 import { PageHeader } from "@/components/PageHeader"
 import { GlyphSprout, GlyphTower, GlyphPair } from "@/components/MaterialGlyph"
+import DefinitionLead from "@/components/DefinitionLead"
+import DefinitionFaq from "@/components/DefinitionFaq"
 
 const dict = getDefaultDictionary()
 
@@ -33,6 +35,9 @@ export default function MontessoriClient() {
       />
 
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28 space-y-20 lg:space-y-28">
+        {/* 정의 front-load — H1 직후 첫 콘텐츠. 정의형 쿼리 인용 최적화. */}
+        <DefinitionLead slug="montessori" />
+
         {/* History */}
         <section className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
@@ -77,6 +82,9 @@ export default function MontessoriClient() {
             ))}
           </div>
         </section>
+
+        {/* FAQ — 질문형 헤딩으로 정의형 쿼리 인용 후보 확장 */}
+        <DefinitionFaq slug="montessori" />
       </div>
 
       {/* Quote — pine band bookends the page */}

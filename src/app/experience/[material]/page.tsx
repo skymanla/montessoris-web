@@ -5,9 +5,11 @@ import { MATERIALS, getMaterial } from "@/features/experience/materials"
 import JsonLd from "@/components/JsonLd"
 import {
   breadcrumbJsonLd,
+  definedTermJsonLd,
   faqPageJsonLd,
   learningResourceJsonLd,
 } from "@/lib/structured-data"
+import { getDefinition } from "@/lib/definitions"
 import { createPageMetadata } from "@/lib/metadata"
 
 type Props = { params: Promise<{ material: string }> }
@@ -35,6 +37,7 @@ export default async function ExperienceScenePage({ params }: Props) {
   const m = getMaterial(material)
   if (!m) notFound()
 
+  const def = getDefinition(`experience-${m.slug}`)
   const structuredData = [
     breadcrumbJsonLd([
       { name: "홈", path: "/" },
@@ -48,7 +51,11 @@ export default async function ExperienceScenePage({ params }: Props) {
       age: m.age,
       keywords: m.guide.keywords,
     }),
-    faqPageJsonLd(m.guide.faqs),
+    faqPageJsonLd(
+      [...m.guide.faqs, ...(def?.faq ?? [])],
+      `/experience/${m.slug}/`
+    ),
+    ...(def ? [definedTermJsonLd(def)] : []),
   ]
 
   return (
