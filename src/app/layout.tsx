@@ -16,6 +16,10 @@ const displaySerif = Hahmlet({
   weight: ["500", "600", "700"],
   variable: "--font-display",
   display: "swap",
+  // CJK fonts are split into hundreds of files. Preloading every split file
+  // creates a large number of high-priority requests; let unicode-range CSS
+  // load only the glyph subsets the current page actually needs.
+  preload: false,
 })
 
 // Body / UI: more character than Noto, highly legible at small sizes.
@@ -24,6 +28,7 @@ const bodySans = IBM_Plex_Sans_KR({
   weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
   display: "swap",
+  preload: false,
 })
 
 // Utility: measurements, eyebrows, age labels — the "precise materials" voice.
@@ -44,9 +49,6 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
   publisher: siteConfig.name,
-  alternates: {
-    canonical: "/",
-  },
   icons: {
     icon: "/icon.svg",
     apple: "/icon.svg",
@@ -77,17 +79,6 @@ export const metadata: Metadata = {
     title: `${siteConfig.name} | 24H 무료 AI 육아 상담 & 몬테소리 가이드`,
     description: siteConfig.description,
     images: [absoluteUrl(siteConfig.ogImage)],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
   },
   // other: {
   //   "google-adsense-account": "ca-pub-1586372003132738",
